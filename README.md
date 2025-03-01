@@ -1,5 +1,5 @@
 
-# HOMEY
+# HOMEY 🏡 
 # Household Planner System
 
 ## Project Overview
@@ -34,11 +34,6 @@ Homey is a simple web-based task management tool designed to help parents and ch
    git clone <repository-url>
 
 2. Open index.html in a web browser.
-
-## Future Enhancements
-- Implement local storage for task persistence.
-- Add authentication for users.
-- Improve UI/UX with interactive elements.
 
 ## Contributors
 - **Ahmed Qarooni** – Scrum Master  
