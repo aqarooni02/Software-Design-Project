@@ -1,1 +1,49 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
 
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+/* Header */
+header {
+    background: #35424a;
+    color: #ffffff;
+    padding-top: 20px;
+    min-height: 70px;
+    border-bottom: #e8491d 3px solid;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+/* User Section */
+.user-section, .task-section, .calendar-section, .analytics-section {
+    background: #ffffff;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0px 0px 10px 0px #ccc;
+}
+
+/* Buttons */
+button {
+    background: #e8491d;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #d13815;
+}
