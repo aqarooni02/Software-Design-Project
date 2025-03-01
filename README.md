@@ -1,54 +1,43 @@
-# Software-Design-Project
 
-Household Planner System
+# Household Planner System
 
-Project Overview
+## Project Overview
+The **Household Planner System** is a simple web-based task management tool designed to help parents and children organize and track household tasks. Parents can create, assign, and monitor tasks, while children can track progress and complete their assigned tasks.
 
-The Household Planner System is a simple web-based task management tool designed to help parents and children manage household tasks. The system allows parents to create, assign, and monitor tasks, while children can track and complete their assigned tasks.
+## Features
+- **User Roles**: Supports Parent and Child roles.
+- **Task Management**: Create, assign, update, and delete tasks.
+- **Task Tracking**: Users can mark tasks as "in progress" or "completed."
+- **Analytics**: Parents can track task completion and provide star ratings.
+- **Shared Calendar**: Displays tasks for better organization.
 
-Features
+## Project Structure
 
-User Roles: Supports Parent and Child roles.
+📂 Household-Planner-System
+│-- index.html    # Main HTML file
+│-- style.css     # Stylesheet for the website
+│-- script.js     # JavaScript file handling logic
+│-- README.md     # Project documentation
 
-Task Management: Create, assign, update, and delete tasks.
+## Technologies Used
+- **HTML** – Structuring the web pages
+- **CSS** – Styling the user interface
+- **JavaScript** – Implementing logic and interactions
 
-Task Tracking: Users can mark tasks as in progress or completed.
+## Installation & Usage
+1. Clone this repository:
+   git clone <repository-url>
 
-Analytics: Parents can track task completion and provide star ratings.
+2. Open index.html in a web browser.
 
-Shared Calendar: Tasks are displayed in a shared calendar.
+## Future Enhancements
+- Implement local storage for task persistence.
+- Add authentication for users.
+- Improve UI/UX with interactive elements.
 
-Project Structure
-
-|-- index.html    # Main HTML file
-|-- style.css     # Stylesheet for the website
-|-- script.js     # JavaScript file handling the logic
-|-- README.md     # Project documentation
-
-Technologies Used
-
-HTML
-
-CSS
-
-JavaScript
-
-Installation & Usage
-
-Clone this repository:
-
-git clone <repository-url>
-
-Open index.html in a web browser.
-
-Future Enhancements
-
-Implement local storage for task persistence.
-
-Add authentication for users.
-
-Improve UI/UX with interactive elements.
-
-Contributors
-
-Ahmed, Athbi, Ghareesa, & Zain
+## Contributors
+- **Ahmed Qarooni** – Scrum Master  
+- **Athbi Salmeen** – Product Owner  
+- **Ghareesa Albuflasa** – Development Team Member  
+- **Zain Mayoof** – Development Team Member  
+```
