@@ -1,8 +1,9 @@
 
+# HOMEY
 # Household Planner System
 
 ## Project Overview
-The **Household Planner System** is a simple web-based task management tool designed to help parents and children organize and track household tasks. Parents can create, assign, and monitor tasks, while children can track progress and complete their assigned tasks.
+Homey is a simple web-based task management tool designed to help parents and children organize and track household tasks. Parents can create, assign, and monitor tasks, while children can track progress and complete their assigned tasks.
 
 ## Features
 - **User Roles**: Supports Parent and Child roles.
