@@ -15,8 +15,11 @@ The **Household Planner System** is a simple web-based task management tool desi
 
 📂 Household-Planner-System
 │-- index.html    # Main HTML file
+
 │-- style.css     # Stylesheet for the website
+
 │-- script.js     # JavaScript file handling logic
+
 │-- README.md     # Project documentation
 
 ## Technologies Used
