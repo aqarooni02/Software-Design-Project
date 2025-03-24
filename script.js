@@ -99,6 +99,8 @@ class Calendar {
     }
 }
 
+
+
 // Analytics class
 class Analytics {
     viewAllAnalytics() {
