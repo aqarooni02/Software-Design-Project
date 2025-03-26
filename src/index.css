@@ -1,46 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 @import "tailwindcss";
 /* Import Poppins font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
 /* Custom theme styling */
 @theme {
-    --font-family-sans: "Poppins", sans-serif;
+    --font-family-sans: Poppins, sans-serif;
+
+    /* Typography sizes */
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-3xl: 1.875rem;
+    --text-4xl: 2.25rem;
+
+    /* Color palette */
+    --color-primary: #4A90E2;
+    --color-secondary: #FF4F81;
+    --color-accent: #FFC107;
+    --color-bg-light: #BDD8FF;
+    --color-bg-dark: #1E3A8A;
+    --color-text-dark: #333333;
+    --color-text-light: #FFFFFF;
+
+    /* Button styles */
+    --button-bg: var(--color-primary);
+    --button-hover: #357ABD;
+    --button-text: var(--color-text-light);
+
+    /* Card styles */
+    --card-bg: var(--color-bg-light);
+    --card-border: #D1D5DB;
+}
+
+body {
+    font-family: var(--font-family-sans);
+    color: var(--color-text-light);
+    background-color: var(--color-bg-light);
 }
 
 /* Navbar styling */
 .navbar {
-  @apply bg-[#0050A0] text-white flex items-center justify-between p-4;
+  @apply bg-[#0151C2] flex items-center justify-between px-3 py-2;
 }
 
-/* Sidebar avatars */
-.avatar {
-  @apply w-16 h-16 rounded-full border-4 border-[#FF6B6B] mb-2;
-}
-
-/* Card styling */
-.task-card {
-  @apply bg-[#A5C8F0] p-4 rounded-lg shadow-md mb-4;
-}
-
-/* Task title */
-.task-title {
-  @apply font-bold text-lg;
-}
-
-/* Due date styling */
-.task-date {
-  @apply text-sm font-medium text-[#333333];
-}
-
-/* Buttons */
-
-
-/* Section headers */
-.section-title {
-  @apply text-[#0050A0] font-bold text-2xl mb-4;
-}
-
-/* Character speech bubble styling */
-.speech-bubble {
-  @apply bg-white text-[#0050A0] font-bold p-4 rounded-lg shadow-md;
-}

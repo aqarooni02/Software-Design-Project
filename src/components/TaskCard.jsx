@@ -2,8 +2,8 @@ import React from "react";
 
 export const TaskCard = ({ task, onEdit, onDelete, onToggleStatus }) => {
   return (
-    <div className="flex items-center justify-between p-4 bg-blue-300 rounded-lg shadow-md">
-      <div className="flex items-start">
+    <div className="flex items-center justify-between p-4 bg-blue-400 rounded-lg shadow-md border-b-blue-700 border-b-2">
+      <div className="flex items-center">
         <input
           type="checkbox"
           checked={task.taskStatus}
