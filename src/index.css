@@ -1,0 +1,46 @@
+@import "tailwindcss";
+/* Import Poppins font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+/* Custom theme styling */
+@theme {
+    --font-family-sans: "Poppins", sans-serif;
+}
+
+/* Navbar styling */
+.navbar {
+  @apply bg-[#0050A0] text-white flex items-center justify-between p-4;
+}
+
+/* Sidebar avatars */
+.avatar {
+  @apply w-16 h-16 rounded-full border-4 border-[#FF6B6B] mb-2;
+}
+
+/* Card styling */
+.task-card {
+  @apply bg-[#A5C8F0] p-4 rounded-lg shadow-md mb-4;
+}
+
+/* Task title */
+.task-title {
+  @apply font-bold text-lg;
+}
+
+/* Due date styling */
+.task-date {
+  @apply text-sm font-medium text-[#333333];
+}
+
+/* Buttons */
+
+
+/* Section headers */
+.section-title {
+  @apply text-[#0050A0] font-bold text-2xl mb-4;
+}
+
+/* Character speech bubble styling */
+.speech-bubble {
+  @apply bg-white text-[#0050A0] font-bold p-4 rounded-lg shadow-md;
+}
