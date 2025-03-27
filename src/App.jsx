@@ -10,7 +10,7 @@ function App() {
   return (
     <>
     {/* <TaskCard task={task}/> */}
-    <ToDoParent/>
+    <ToDoParent />
     </>
   )
 }
