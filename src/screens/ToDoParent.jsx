@@ -1,5 +1,5 @@
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Character } from "../components/Character"
 import { NavBar } from "../components/NavBar"
 import { PersonalTaskList } from "../components/PersonalTaskList"
@@ -7,6 +7,16 @@ import { CreateTaskCard } from "../components/CreateTaskCard"
 export const ToDoParent = () => {
     const [addingTask, setAddingTask] = useState(false)
     const [parentTasks, setParentTasks] = useState([])
+
+    const getTasks = JSON.parse(localStorage.getItem("parentTasks"));
+    useEffect(() => {
+        if (getTasks == null) {
+            setParentTasks([])
+        } else {
+            setParentTasks(getTasks);
+        }
+    }, [])
+
     const createTask = (task) => {
         setAddingTask(false)
         // const newTask = new Task({...task})
@@ -32,7 +42,7 @@ export const ToDoParent = () => {
 
                         <div className="flex-1 p-4"></div>
                         <div className="flex-1 p-4 text-blue-700">
-                            <PersonalTaskList tasks={parentTasks} addTask={() => setAddingTask(true) } deleteTask={deleteTask} />
+                            <PersonalTaskList tasks={parentTasks} addTask={() => setAddingTask(true)} deleteTask={deleteTask} />
                         </div>
                         <div className="flex-1 p-4">
                             <Character />
