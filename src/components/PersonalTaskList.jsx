@@ -24,7 +24,7 @@ export const PersonalTaskList = ({ tasks, addTask, editTask, deleteTask}) => {
         taskList.length != 0 ? 
         taskList.map((task) => (
 
-          <TaskCard key={task.taskId} task={task} onDelete={deleteTask} />
+          <TaskCard key={task.taskId} task={task} onDelete={deleteTask} onEdit={editTask} />
         )) :
         <h2 className="text-xl  font-bold mb-2">No Tasks Yet!</h2>
       }
