@@ -3,18 +3,15 @@ import { Task } from "../classes/Task"
 import { useEffect, useState } from "react"
 
 
-export const PersonalTaskList = ({ addTask }) => {
+export const PersonalTaskList = ({ tasks, addTask, editTask, deleteTask}) => {
   const task = new Task('Task 1', 'Description 1', '2022-12-31', 'High', false)
   // console.log(task)
   const [taskList, setTaskList] = useState([])
   useEffect(()=> {
-    const getTasks = JSON.parse(localStorage.getItem("parentTasks"));
-    if (getTasks == null) {
-      setTaskList([])
-  } else {
-      setTaskList(getTasks);
-  }
-  },[])
+   
+      setTaskList(tasks);
+  
+  },[tasks])
   
 
   return (
@@ -26,7 +23,7 @@ export const PersonalTaskList = ({ addTask }) => {
       "> {
         taskList.map((task) => (
 
-          <TaskCard key={task.taskId} task={task} />
+          <TaskCard key={task.taskId} task={task} onDelete={deleteTask} />
         ))
       }
           {/* <TaskCard task={task} />
