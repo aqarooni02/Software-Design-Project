@@ -1,12 +1,16 @@
-import { useState } from 'react'
+
 import './App.css'
 
+import {Task} from './classes/Task'
+import { TaskCard } from './components/TaskCard'
+import { ToDoParent } from './screens/ToDoParent'
+
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-    Zain
+    {/* <TaskCard task={task}/> */}
+    <ToDoParent />
     </>
   )
 }
