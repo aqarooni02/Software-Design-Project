@@ -1,3 +1,9 @@
+/*    #4A90E2,  /* Blue */
+/* #FF69B4,  Pink */
+/* #FFA500   /* Orange */
+/*    leave this here for now */
+
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 @import "tailwindcss";
 /* Import Poppins font */
@@ -48,19 +54,513 @@ body {
   @apply bg-[#0151C2] flex items-center justify-between px-3 py-2;
 }
 
+/* hover button */
 button {
     @apply hover:cursor-grab
 }
 
-select {
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
-    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
-      linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
-    background-repeat: no-repeat, repeat;
-    /* arrow icon position (1em from the right, 50% vertical) , then gradient position*/
-    background-position: right .7em top 50%, 0 0;
-    /* icon size, then gradient */
-    background-size: .65em auto, 100%;
+/* CLOUD*/
+/*  floating animations for elements */
+@keyframes float {
+  /* Element gently rises and falls */
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+  }
+  50% {
+    transform: translateY(-10px) scale(1.02);
+    filter: drop-shadow(0 15px 12px rgba(0,0,0,0.15));
+  }
+}
+
+/* floating with rotation */
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    filter: drop-shadow(0 10px 15px rgba(74, 144, 226, 0.1));
+  }
+  50% {
+    transform: translateY(-15px) translateX(10px) rotate(-2deg);
+    filter: drop-shadow(0 15px 15px rgba(74, 144, 226, 0.2));
+  }
+}
+
+/* Delayed floating animation for variety */
+@keyframes float-delayed {
+  0%, 100% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    filter: drop-shadow(0 10px 15px rgba(74, 144, 226, 0.1));
+  }
+  50% {
+    transform: translateY(-25px) translateX(-10px) rotate(3deg);
+    filter: drop-shadow(0 25px 25px rgba(74, 144, 226, 0.2));
+  }
+}
+
+/*  glowing effect */
+@keyframes glow {
+  0%, 100% {
+    opacity: 0.6;
+    filter: blur(15px);
+  }
+  50% {
+    opacity: 0.8;
+    filter: blur(20px);
+  }
+}
+
+/* Shimmering effect for gradients */
+@keyframes shine {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Classes to apply the animations */
+.animate-glow {
+  animation: glow 3s ease-in-out infinite;
+}
+
+.animate-shine {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shine 4s linear infinite;
+}
+
+/* Updated existing animations */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+  filter: drop-shadow(0 10px 15px rgba(74, 144, 226, 0.2));
+}
+
+.animate-float-slow {
+  animation: float-slow 8s ease-in-out infinite;
+  animation-delay: -2s;
+}
+
+.animate-float-delayed {
+  animation: float-delayed 7s ease-in-out infinite;
+  animation-delay: -4s;
+}
+
+/*  glass-like effect for cards and panels */
+.glass {
+  backdrop-filter: blur(12px);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.05)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+/*  gradients */
+.bg-gradient-shine {
+  background: linear-gradient(
+    45deg,
+    #4A90E2,  /* Blue */
+    #FF69B4,  /* Pink */
+    #FFA500   /* Orange */
+  );
+  background-size: 200% 200%;
+  animation: shine 8s linear infinite;
+}
+
+/* Cloud styles */
+.cartoon-cloud {
+    background-color: #fff;
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(0,0,0,0.1));
+    border-radius: 1em;
+    box-shadow: 
+        inset 0 0 0 1px rgba(255,255,255,0.5),
+        0 8px 16px rgba(74, 144, 226, 0.15);
+    display: inline-block;
+    position: relative;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+}
+
+.cloud-small {
+    height: 1.5em;
+    width: 4.5em;
+}
+
+.cloud-medium {
+    height: 2em;
+    width: 6em;
+}
+
+.cloud-large {
+    height: 2.5em;
+    width: 7.5em;
+}
+
+.cartoon-cloud:after,
+.cartoon-cloud:before {
+    background-color: #fff;
+    content: '';
+    border-radius: 100%;
+    position: absolute;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4);
+}
+
+.cartoon-cloud:after {
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0) 50%, rgba(0,0,0,0.025));
+    height: 2em;
+    right: 0.8em;
+    top: -1em;
+    width: 2em;
+}
+
+.cartoon-cloud:before {
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0) 50%, rgba(0,0,0,0.075));
+    height: 3.2em;
+    left: 0.8em;
+    top: -1.5em;
+    width: 3.2em;
+}
+
+/* Animation utilities */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float 8s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 7s ease-in-out infinite;
+}
+
+.glass {
+  backdrop-filter: blur(12px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.bg-gradient-shine {
+  background: linear-gradient(45deg, #4A90E2, #6366f1, #4A90E2);
+  background-size: 200% 200%;
+  animation: shine 8s linear infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+    filter: drop-shadow(0 5px 15px rgba(74, 144, 226, 0.2));
+  }
+  50% {
+    transform: translateY(-15px);
+    filter: drop-shadow(0 20px 30px rgba(74, 144, 226, 0.25));
+  }
+}
+
+@keyframes shine {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Cloud styles and animations */
+.cloudPane {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to bottom,
+        #1a4b8c 0%,    /* Darker blue */
+        #2b6cb0 30%,   /* Medium blue */
+        #90cdf4 60%,   /* Light blue */
+        rgba(255, 255, 255, 0.8) 85%,
+        transparent 100%
+    );
+    z-index: 0;
+    pointer-events: none;
+}
+
+.bigCloud {
+  box-shadow: 10px 10px 5px 20px black inset;
+  position: absolute;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+  transition: all 0.3s ease;
+}
+
+.bigCloud:hover {
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.2));
+}
+
+.smallCircle {
+  height: 100px;
+  width: 100px;
+  background: white;
+  border-radius: 100%;
+  position: absolute;
+}
+
+.middleCircle {
+  height: 150px;
+  width: 150px;
+  background: white;
+  border-radius: 100%;
+  position: absolute;
+}
+
+.largeCircle {
+  height: 200px;
+  width: 200px;
+  background: white;
+  border-radius: 100%;
+  position: absolute;
+}
+
+.star {
+  height: 3px;
+  width: 3px;
+  background: white;
+  position: absolute;
+  z-index: 0;
+  animation: twinkle 4s ease-in-out infinite;
+}
+
+#cloud1 {
+  opacity: .9;
+  top: 50px;
+  left: 120%;
+  transform: scale(1.2);
+  animation: drift 25s linear infinite;
+  animation-delay: 8s;
+  z-index: 2;
+}
+
+#cloud2 {
+  opacity: .8;
+  top: 40px;
+  left: 120%;
+  transform: scale(.7);
+  animation: drift 50s linear infinite;
+  z-index: 1;
+}
+
+#cloud3 {
+  opacity: 0;
+  top: 20px;
+  left: 50%;
+  transform: scale(.35);
+  animation: driftBg 70s linear;
+  z-index: 0;
+}
+
+/* Add these cloud positions and animations */
+#cloud4 {
+    opacity: 0;
+    top: 50px;
+    left: 20%;
+    transform: scale(.40, .45);
+    animation: driftBg2 60s linear infinite;
+    z-index: 0;
+}
+
+#cloud5 {
+    opacity: 0;
+    top: 220px;
+    left: 90%;
+    transform: scale(.40);
+    animation: driftBg3 90s linear infinite;
+    z-index: 0;
+}
+
+#cloud6 {
+    opacity: .7;
+    top: 60px;
+    left: 120%;
+    transform: scale(.40);
+    animation: drift 110s linear infinite;
+    animation-delay: 11s;
+    z-index: 0;
+}
+
+#cloud7 {
+    opacity: .8;
+    top: 95px;
+    left: 120%;
+    transform: scale(.7);
+    animation: drift 45s linear infinite;
+    animation-delay: 35s;
+    z-index: 1;
+}
+
+#circ1 { z-index: 1; }
+#circ2 { top: 50px; left: -40px; }
+#circ3 { top: 50px; left: -120px; }
+#circ4 { top: 30px; left: -60px; }
+#circ5 { top: 100px; left: -150px; }
+#circ6 { top: 100px; left: 130px; }
+
+#circ1shadow, #circ2shadow, #circ3shadow, #circ5shadow, #circ6shadow {
+  background-repeat: no-repeat;
+  position: absolute;
+  z-index: 2;
+  transform: scale(.9, -.9);
+}
+
+@keyframes drift {
+  from {
+    left: 120%;
+  }
+  to {
+    left: -25%;
+  }
+}
+
+@keyframes driftBg {
+  0% {
+    left: 50%;
+    opacity: 0
+  }
+  3% {
+    left: 48%;
+    opacity: .7
+  }
+  100% {
+    left: -25%;
+    opacity: .7;
+  }
+}
+
+/* Add these missing animation keyframes */
+@keyframes driftBg2 {
+    0% {
+        left: 20%;
+        opacity: 0
+    }
+    3% {
+        left: 19%;
+        opacity: .7
+    }
+    100% {
+        left: -25%;
+        opacity: .7;
+    }
+}
+
+@keyframes driftBg3 {
+    0% {
+        left: 90%;
+        opacity: 0
+    }
+    2% {
+        left: 88%;
+        opacity: .65
+    }
+    100% {
+        left: -25%;
+        opacity: .65;
+    }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+#star1 { top: 20px; left: 20%; }
+#star1 + .star { top: 20px; left: 70%; }
+
+/*  additional stars */
+#star12 {
+    top: 60px;
+    left: 32%;
+}
+#star12 + .star {
+    top: 60px;
+    left: 85%;
+}
+
+#star13 {
+    height: 4px;
+    width: 4px;
+    top: 110px;
+    left: 52%;
+}
+#star13 + .star {
+    height: 4px;
+    width: 4px;
+    top: 110px;
+    left: 95%;
+}
+
+#star14 {
+    top: 45px;
+    left: 15%;
+}
+#star14 + .star {
+    top: 45px;
+    left: 73%;
+}
+
+#star15 {
+    height: 5px;
+    width: 5px;
+    top: 125px;
+    left: 25%;
+}
+#star15 + .star {
+    height: 5px;
+    width: 5px;
+    top: 125px;
+    left: 82%;
+}
+
+/* Add responsive styles */
+@media (max-width: 1024px) {
+  .max-w-2xl {
+    max-width: 100%;
+  }
+}
+
+/* Add these styles after your existing animations */
+
+/* Star burst effect */
+.star-burst {
+  position: fixed;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.star-particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: linear-gradient(
+    to right,
+    #60a5fa,  /* Blue */
+    #ec4899,  /* Pink */
+    #f97316   /* Orange */
+  );
+  border-radius: 50%;
+  transform-origin: center;
+}
+
+@keyframes burst {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(0);
+    opacity: 0;
+  }
 }

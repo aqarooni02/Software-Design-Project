@@ -1,18 +1,23 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './App.css';
 
-import './App.css'
-
-import {Task} from './classes/Task'
-import { TaskCard } from './components/TaskCard'
-import { ToDoParent } from './screens/ToDoParent'
+import { Landing } from './screens/Landing';
+import { SignIn } from './screens/SignIn';
+import { SignUp } from './screens/SignUp';
+import { ToDoParent } from './screens/ToDoParent';
 
 function App() {
-
   return (
-    <>
-    {/* <TaskCard task={task}/> */}
-    <ToDoParent />
-    </>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/tasks" element={<ToDoParent />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
