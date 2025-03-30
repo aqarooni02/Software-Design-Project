@@ -10,12 +10,12 @@ export const SignUp = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  // When the sign-up form is submitted:
-  // 1. Prevent the page refresh
-  // 2. Take them straight to tasks to get started!
-  const handleSignUp = (e) => {
+  // check: might fix the routing
+  // 1. prevent the page from refreshing
+  // 2. take the user to their tasks (will chnage to the profile selection)
+  const handleSignIn = (e) => {
     e.preventDefault();
-    navigate('/tasks');
+    navigate('/profile-selection');
   };
 
   return (

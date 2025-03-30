@@ -49,9 +49,15 @@ body {
     overflow-y: hidden
 }
 
-/* Navbar styling */
-.navbar {
+/* Navbar styling .navbar {
   @apply bg-[#0151C2] flex items-center justify-between px-3 py-2;
+}
+
+*/
+
+
+.navbar {
+  @apply flex items-center justify-between px-3 py-2;
 }
 
 /* hover button */
