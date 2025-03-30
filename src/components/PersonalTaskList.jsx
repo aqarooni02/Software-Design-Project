@@ -3,8 +3,7 @@ import { Task } from "../classes/Task"
 import { useEffect, useState } from "react"
 
 
-export const PersonalTaskList = ({ tasks, addTask, editTask, deleteTask}) => {
-  const task = new Task('Task 1', 'Description 1', '2022-12-31', 'High', false)
+export const PersonalTaskList = ({ tasks, addTask, deleteTask}) => {
   // console.log(task)
   const [taskList, setTaskList] = useState([])
   useEffect(()=> {
