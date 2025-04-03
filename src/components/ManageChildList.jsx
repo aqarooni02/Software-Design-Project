@@ -3,7 +3,7 @@ import { Task } from "../classes/Task"
 import { useEffect, useState } from "react"
 
 
-export const ManageChildList = ({ tasks, childId}) => {
+export const ManageChildList = ({ tasks, childId }) => {
   // console.log(task)
   const [taskList, setTaskList] = useState([])
   useEffect(() => {
@@ -26,19 +26,13 @@ export const ManageChildList = ({ tasks, childId}) => {
               )) :
               <h2 className="text-xl font-bold mb-2">No Tasks Yet!</h2>
           }
-          {/* <TaskCard task={task} />
-          <TaskCard task={task} />
-          <TaskCard task={task} />
-          <TaskCard task={task} />
-          <TaskCard task={task} />
-          <TaskCard task={task} /> */}
 
         </div>
       </div>
       <div className="p-4">
         <button className="w-full bg-pink-500 text-white py-2 rounded-lg text-lg font-semibold"
-          onClick={() => addTask()}>
-          Add Task
+          onClick={() => assignTask()}>
+          Assign Task
         </button>
       </div>
     </>

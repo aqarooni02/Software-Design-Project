@@ -24,7 +24,7 @@ export const Landing = () => {
     // Figure out where the button is on the screen
     const button = e.currentTarget;
     const rect = button.getBoundingClientRect();
-    
+
     // Create a container for our star burst
     const burst = document.createElement('div');
     burst.className = 'star-burst';
@@ -35,15 +35,15 @@ export const Landing = () => {
     for (let i = 0; i < 20; i++) {
       const particle = document.createElement('div');
       particle.className = 'star-particle';
-      
+
       // Make each particle go in a random direction
       const angle = (Math.random() * 360) * (Math.PI / 180);
       const velocity = 100 + Math.random() * 150;
-      
+
       particle.style.setProperty('--tx', `${Math.cos(angle) * velocity}px`);
       particle.style.setProperty('--ty', `${Math.sin(angle) * velocity}px`);
       particle.style.animation = 'burst 0.8s ease-out forwards';
-      
+
       burst.appendChild(particle);
     }
 
@@ -95,7 +95,7 @@ export const Landing = () => {
           <div className="max-w-5xl glass p-12 rounded-3xl shadow-2xl backdrop-blur-md">
             <div className="flex flex-col space-y-12">
               {/* Title section */}
-              <div className="text-center"> {}
+              <div className="text-center"> 
                 <h1 className="text-6xl sm:text-8xl font-bold text-blue-900">
                   Welcome to
                   <span className="bg-gradient-to-r from-blue-600 via-pink-500 to-orange-500 text-transparent bg-clip-text block mt-4">
@@ -114,8 +114,8 @@ export const Landing = () => {
                   {
                     icon: (
                       <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <circle cx="12" cy="12" r="10" className="text-blue-500" strokeWidth="2"/>
-                        <path d="M9 12l2 2 4-4" className="text-blue-500" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <circle cx="12" cy="12" r="10" className="text-blue-500" strokeWidth="2" />
+                        <path d="M9 12l2 2 4-4" className="text-blue-500" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     ),
                     color: "blue",
@@ -125,8 +125,8 @@ export const Landing = () => {
                   {
                     icon: (
                       <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <rect x="3" y="4" width="18" height="18" rx="2" className="text-pink-500" strokeWidth="2"/>
-                        <path d="M16 2v4M8 2v4M3 10h18" className="text-pink-500" strokeWidth="2" strokeLinecap="round"/>
+                        <rect x="3" y="4" width="18" height="18" rx="2" className="text-pink-500" strokeWidth="2" />
+                        <path d="M16 2v4M8 2v4M3 10h18" className="text-pink-500" strokeWidth="2" strokeLinecap="round" />
                       </svg>
                     ),
                     color: "pink",
@@ -136,8 +136,8 @@ export const Landing = () => {
                   {
                     icon: (
                       <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <circle cx="12" cy="12" r="10" className="text-orange-500" strokeWidth="2"/>
-                        <path d="M12 8v8M8 12h8" className="text-orange-500" strokeWidth="2" strokeLinecap="round"/>
+                        <circle cx="12" cy="12" r="10" className="text-orange-500" strokeWidth="2" />
+                        <path d="M12 8v8M8 12h8" className="text-orange-500" strokeWidth="2" strokeLinecap="round" />
                       </svg>
                     ),
                     color: "orange",
@@ -145,7 +145,7 @@ export const Landing = () => {
                     text: "Earn points for completed tasks!"
                   }
                 ].map((feature, index) => (
-                  <div key={index} 
+                  <div key={index}
                     className="flex flex-col items-center gap-4 p-8 bg-white/15 rounded-2xl backdrop-blur-sm
                     border border-white/20 hover:bg-white/25 transition-all duration-300 hover:scale-105 shadow-xl">
                     <div className={`bg-${feature.color}-500/15 p-4 rounded-full flex items-center justify-center`}>
@@ -158,8 +158,8 @@ export const Landing = () => {
               </div>
 
               {/* Button */}
-              <button 
-                onClick={handleGetStarted}  
+              <button
+                onClick={handleGetStarted}
                 className="bg-gradient-to-r from-blue-600 via-pink-500 to-orange-500 text-white 
                 px-10 sm:px-20 py-5 sm:py-7 rounded-full text-2xl sm:text-3xl font-semibold 
                 hover:scale-105 transition-all duration-300 transform hover:-translate-y-1 
@@ -171,12 +171,12 @@ export const Landing = () => {
           </div>
 
           {/* Right character section */}
-          <div className="relative hidden lg:block"> 
+          <div className="relative hidden lg:block">
             <div className="absolute inset-0 bg-gradient-to-b from-blue-200/30 to-transparent rounded-full filter blur-3xl"></div>
             <img
               src={characterBlue}
               alt="Homey Character"
-              className="w-[72rem] h-[72rem] object-contain animate-float relative z-10 drop-shadow-2xl" 
+              className="w-[72rem] h-[72rem] object-contain animate-float relative z-10 drop-shadow-2xl"
             />
           </div>
         </div>

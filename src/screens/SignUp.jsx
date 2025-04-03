@@ -10,12 +10,12 @@ export const SignUp = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  // When the sign-up form is submitted:
-  // 1. Prevent the page refresh
-  // 2. Take them straight to tasks to get started!
-  const handleSignUp = (e) => {
+  // check: might fix the routing
+  // 1. prevent the page from refreshing
+  // 2. take the user to their tasks (will chnage to the profile selection)
+  const handleSignIn = (e) => {
     e.preventDefault();
-    navigate('/tasks');
+    navigate('/profile-selection');
   };
 
   return (
@@ -29,7 +29,7 @@ export const SignUp = () => {
         <div className="glow-overlay" />
         <div className="blur-overlay" />
       </div>
-      
+
       {/* Main content box with our signature glass look */}
       <div className="max-w-md w-full mx-8 relative z-10">
         <div className="glass p-8 rounded-3xl shadow-2xl backdrop-blur-md">
@@ -110,7 +110,7 @@ export const SignUp = () => {
             {/* Link back to sign in */}
             <p className="text-center text-blue-900">
               Already have an account?{' '}
-              <a 
+              <a
                 onClick={() => navigate('/signin')}
                 className="text-blue-600 hover:text-blue-800 font-semibold transition-colors cursor-pointer"
               >

@@ -10,12 +10,12 @@ export const SignIn = () => {
   const navigate = useNavigate();
 
 
-  // When the sign-in form is submitted:
-  // 1. Prevent the page from refreshing
-  // 2. Take the user to their tasks (will chnage to the profile selection)
+  // check: might fix the routing
+  // 1. prevent the page from refreshing
+  // 2. take the user to their tasks (will chnage to the profile selection)
   const handleSignIn = (e) => {
     e.preventDefault();
-    navigate('/tasks');
+    navigate('/profile-selection');
   };
 
   return (
@@ -84,7 +84,7 @@ export const SignIn = () => {
             {/* Link to sign up for new users */}
             <p className="text-center text-blue-900">
               Don't have an account?{' '}
-              <a 
+              <a
                 onClick={() => navigate('/signup')}
                 className="text-blue-600 hover:text-blue-800 font-semibold transition-colors cursor-pointer"
               >

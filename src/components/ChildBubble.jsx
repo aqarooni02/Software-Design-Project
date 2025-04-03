@@ -1,7 +1,7 @@
 import Child1Avatar from '../assets/child1.png';
 import Child2Avatar from '../assets/child2.png';
 
-export const ChildBubble = ({ color, childName, childId, onSelect}) => {
+export const ChildBubble = ({ color, childName, childId, onSelect }) => {
     const avatars = [Child1Avatar, Child2Avatar];
     const handleSelect = () => {
         console.log(onSelect)
