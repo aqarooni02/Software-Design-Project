@@ -18,7 +18,7 @@ export const ProfileSelection = () => {
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#1a4b8c] via-[#90cdf4] to-white">
+    <div className="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#1a4b8c] via-[#90cdf4] to-white overflow-x-hidden ">
       {/* Cloud background (same as Landing) */}
       <div className="cloudPane absolute inset-0">
         {/* Stars in the sky */}
@@ -51,10 +51,10 @@ export const ProfileSelection = () => {
       </div>
 
       {/* Main content */}
-      <h1 className="text-5xl text-white mb-10 relative z-10">
+      <h1 className="text-5xl text-white mb-10 relative ">
         Select Your Profile
       </h1>
-      <div className="flex flex-col md:flex-row gap-12 relative z-10">
+      <div className="flex flex-col max-h-dvh md:flex-row gap-12 overflow-y-auto [&::-webkit-scrollbar]:w-0 p-4 mb-4 ">
         <div
           onClick={() => handleSelect("blue")}
           className="cursor-pointer transform transition duration-300 hover:scale-110"
