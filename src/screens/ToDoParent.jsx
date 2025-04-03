@@ -63,7 +63,21 @@ export const ToDoParent = () => {
         });
         setParentTasks(editTask);
         localStorage.setItem("parentTasks", JSON.stringify(editTask));
+        setTaskToEdit(null);
     };
+
+    const toggleCompletedStatus = (taskId) => {
+        const togglingTask = parentTasks.find((task) => task.taskId === taskId);
+        const toggleStatus = parentTasks.map((task) => {
+          if (task.taskId === togglingTask.taskId) {
+            return { ...task, taskStatus: !task.taskStatus }
+          }
+          return task;
+        });
+        setParentTasks(toggleStatus);
+        localStorage.setItem('parentTasks', JSON.stringify(toggleStatus));
+        console.log(togglingTask.taskStatus)
+      }
 
     const RenderView = () => {
         if (addingTask) {
@@ -110,6 +124,7 @@ export const ToDoParent = () => {
                             tasks={parentTasks}
                             addTask={() => setAddingTask(true)}
                             deleteTask={deleteTask}
+                            onToggleStatus={toggleCompletedStatus}
                             editTask={startEditingTask}
                         />
                     </div>

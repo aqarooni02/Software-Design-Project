@@ -9,6 +9,7 @@ import characterOrange from '../assets/CharacterOrange.png';
 import { AssignedTaskList } from "../components/AssignedTasksList";
 import { Task } from "../classes/Task";
 import { Character } from "../components/Character";
+import { EditTaskCard } from "../components/EditTaskCard";
 
 export const ToDoChild = ({ childType = "pink" }) => {
   // Use childType ("pink" or "orange") to determine theme and storage key
@@ -44,6 +45,12 @@ export const ToDoChild = ({ childType = "pink" }) => {
     localStorage.setItem(localStorageKey, JSON.stringify(updatedTasks));
   };
 
+  const startEditingTask = (taskId) => {
+    const editingTask = personalTasks.find((task) => task.taskId === taskId);
+    setTaskToEdit(editingTask);
+    setEditingTask(true);
+};
+
   const editTask = (newTask) => {
     setEditingTask(false);
     const editTask = personalTasks.map((task) => {
@@ -61,7 +68,21 @@ export const ToDoChild = ({ childType = "pink" }) => {
     });
     setPersonalTasks(editTask);
     localStorage.setItem(localStorageKey, JSON.stringify(editTask));
+    setTaskToEdit(null);
   };
+
+  const toggleCompletedStatus = (taskId) => {
+    const togglingTask = personalTasks.find((task) => task.taskId === taskId);
+    const toggleStatus = personalTasks.map((task) => {
+      if (task.taskId === togglingTask.taskId) {
+        return { ...task, taskStatus: !task.taskStatus }
+      }
+      return task;
+    });
+    setPersonalTasks(toggleStatus);
+    localStorage.setItem(localStorageKey, JSON.stringify(toggleStatus));
+    console.log(togglingTask.taskStatus)
+  }
 
   const RenderView = () => {
     if (addingTask) {
@@ -96,8 +117,8 @@ export const ToDoChild = ({ childType = "pink" }) => {
               tasks={personalTasks}
               addTask={() => setAddingTask(true)}
               deleteTask={deleteTask}
-              onToggleStatus={undefined} // Your toggle/edit functions here if needed
-              onEdit={undefined}
+              onToggleStatus={toggleCompletedStatus} // Your toggle/edit functions here if needed
+              onEdit={startEditingTask}
               theme={theme}  // "pink" or "orange"
             />
           </div>
@@ -125,58 +146,5 @@ export const ToDoChild = ({ childType = "pink" }) => {
       </div>
     </div>
   );
-  return (
-    <div className={`h-screen flex flex-col ${backgroundClass}`}>
-      <NavBar parent={false} childType={childType} /> {/* Pass childType now */}
-      <div className="flex flex-1 gap-4 p-4">
-        {!addingTask ? (
-          <>
-            {/* Left section - Assigned Tasks */}
-            <div className="flex-1 p-4">
-              <AssignedTaskList childType={childType} />
-            </div>
 
-            {/* Middle section - Personal Tasks */}
-            <div className="flex-1 p-4">
-              <PersonalTaskList
-                tasks={personalTasks}
-                addTask={() => setAddingTask(true)}
-                deleteTask={deleteTask}
-                onToggleStatus={undefined} // Your toggle/edit functions here if needed
-                onEdit={undefined}
-                theme={theme}  // "pink" or "orange"
-              />
-            </div>
-
-            {/* Right section - Mascot image */}
-            <div className="flex-1 p-4">
-              <img
-                src={characterImage}
-                alt="Homey Character"
-                className="w-full h-full object-contain animate-float drop-shadow-2xl"
-              />
-            </div>
-          </>
-        ) : (
-          <>
-            {/* Create Task View */}
-            <div className="flex-2 p-4">
-              <CreateTaskCard
-                onSave={createTask}
-                onCancel={() => setAddingTask(false)}
-                theme={theme}  // thetheme is set based on childType ("pink" or "orange")
-              />
-            </div>
-            <div className="flex-1 p-4">
-              <img
-                src={characterImage}
-                alt="Homey Character"
-                className="w-full h-full object-contain animate-float drop-shadow-2xl"
-              />
-            </div>
-          </>
-        )}
-      </div>
-    </div>
-  );
 };

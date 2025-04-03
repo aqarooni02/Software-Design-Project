@@ -42,7 +42,7 @@ export const EditTaskCard = ({ onEdit, onCancel, currentTask }) => {
   return (
     <>
       <div className=" bg-blue-400/40 rounded-3xl border-2 border-blue-400 p-4 text-blue-700">
-        <h2 className="text-2xl  font-bold mb-2">Create New Task</h2>
+        <h2 className="text-2xl  font-bold mb-2">Edit Task</h2>
 
         <div className="grid grid-cols-2 gap-4 [&_*:not(label):not(div)]:bg-white [&_*:not(label):not(div)]:text-black ">
           <div className="col-1">
