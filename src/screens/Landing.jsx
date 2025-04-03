@@ -54,7 +54,7 @@ export const Landing = () => {
 
   return (
     // Main wrapper with gradient background
-    <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-b from-[#1a4b8c] via-[#90cdf4] to-white">
+    <div className="h-dvh flex items-center justify-center relative overflow-x-hidden bg-gradient-to-b from-[#1a4b8c] via-[#90cdf4] to-white">
       {/*  sky with  clouds and stars */}
       <div className="cloudPane absolute inset-0">
         {/*   stars in the sky */}
@@ -183,10 +183,10 @@ export const Landing = () => {
       </div>
 
       {/* glowing effects in the background */}
-      <div className="absolute right-0 bottom-0 w-[36rem] h-[36rem] bg-gradient-shine 
+      {/* <div className="absolute right-0 bottom-0 w-[36rem] h-[36rem] bg-gradient-shine 
         rounded-full transform translate-x-1/4 translate-y-1/4 opacity-5 blur-3xl animate-pulse"></div>
       <div className="absolute left-0 top-0 w-[32rem] h-[32rem] bg-gradient-shine 
-        rounded-full transform -translate-x-1/4 -translate-y-1/4 opacity-5 blur-3xl animate-pulse"></div>
+        rounded-full transform -translate-x-1/4 -translate-y-1/4 opacity-5 blur-3xl animate-pulse"></div> */}
     </div>
   );
 };
