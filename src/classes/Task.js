@@ -1,7 +1,12 @@
 import { v4 as uuidv4 } from 'uuid';
 export class Task {
-  constructor(taskTitle, taskDescription, taskDate, taskPriority, taskStatus) {
-    this.taskId = uuidv4();
+  constructor(taskTitle, taskDescription, taskDate, taskPriority, taskStatus, taskId) {
+    if (taskId) {
+      this.taskId = taskId
+    }
+    else {
+      this.taskId = uuidv4();
+    }
     this.taskTitle = taskTitle;
     this.taskDescription = taskDescription;
     this.taskDate = taskDate;

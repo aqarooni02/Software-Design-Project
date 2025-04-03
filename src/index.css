@@ -564,3 +564,10 @@ button {
     opacity: 0;
   }
 }
+.childBubbleBg0 {
+  @apply bg-[radial-gradient(circle_at_top_right,_#F9F6F2,_#BF2761)]
+}
+
+.childBubbleBg1 {
+  @apply bg-[radial-gradient(circle_at_top_right,_#F9F6F2,_#D55F2E)]
+}

@@ -9,6 +9,7 @@ export const SignIn = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+
   // When the sign-in form is submitted:
   // 1. Prevent the page from refreshing
   // 2. Take the user to their tasks (will chnage to the profile selection)
