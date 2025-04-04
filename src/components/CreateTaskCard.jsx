@@ -12,7 +12,6 @@ export const CreateTaskCard = ({ onSave, onCancel, theme }) => {
       alert("Please fill in all fields!");
       return;
     }
-
     onSave(
       new Task(
         taskTitle,
@@ -22,7 +21,6 @@ export const CreateTaskCard = ({ onSave, onCancel, theme }) => {
         false // Default to not completed
       )
     );
-
     // Clear inputs after saving
     setTaskTitle("");
     setTaskDate("");
@@ -30,25 +28,25 @@ export const CreateTaskCard = ({ onSave, onCancel, theme }) => {
     setTaskPriority("Medium");
   };
 
-  // Determine the card styles according to the theme
+  // Theme-dependent classes.
   const cardBg =
     theme === "orange"
       ? "bg-orange-400/40"
       : theme === "pink"
-        ? "bg-pink-400/40"
-        : "bg-blue-400/40";
+      ? "bg-pink-400/40"
+      : "bg-blue-400/40";
   const cardBorder =
     theme === "orange"
       ? "border-orange-400"
       : theme === "pink"
-        ? "border-pink-400"
-        : "border-blue-400";
+      ? "border-pink-400"
+      : "border-blue-400";
   const cardText =
     theme === "orange"
       ? "text-orange-700"
       : theme === "pink"
-        ? "text-pink-700"
-        : "text-blue-700";
+      ? "text-pink-700"
+      : "text-blue-700";
 
   return (
     <>
@@ -70,6 +68,7 @@ export const CreateTaskCard = ({ onSave, onCancel, theme }) => {
               type="date"
               value={taskDate}
               onChange={(e) => setTaskDate(e.target.value)}
+              min={new Date().toISOString().split("T")[0]}
               className="w-full p-2 border rounded"
             />
           </div>

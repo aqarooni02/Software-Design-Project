@@ -20,8 +20,8 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/profile-selection" element={<ProfileSelection />} />
         <Route path="/tasks" element={<ToDoParent />} />
-        <Route path="/child-tasks" element={<ToDoChild childType="pink" />} />
-        <Route path="/child-tasks-orange" element={<ToDoChild childType="orange" />} />
+        <Route path="/child-tasks" element={<ToDoChild childType="pink" childId={0} />} />
+        <Route path="/child-tasks-orange" element={<ToDoChild childType="orange" childId={1} />} />
         <Route path="/analytics-view" element={<AnalyticsView />} />
         <Route path="/shared-view" element={<SharedView />} />
       </Routes>

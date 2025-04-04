@@ -79,7 +79,7 @@ export const ProfileSelection = () => {
             className="w-[24rem] h-[24rem] object-contain animate-float-slow"
           />
           <p className="mt-4 text-center text-2xl font-semibold text-pink-900">
-            Child 1
+            Child 0
           </p>
         </div>
 
@@ -93,7 +93,7 @@ export const ProfileSelection = () => {
             className="w-[24rem] h-[24rem] object-contain animate-float-slow"
           />
           <p className="mt-4 text-center text-2xl font-semibold text-orange-900">
-            Child 2
+            Child 1
           </p>
         </div>
       </div>

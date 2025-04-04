@@ -11,49 +11,62 @@ import { Task } from "../classes/Task";
 import { Character } from "../components/Character";
 import { EditTaskCard } from "../components/EditTaskCard";
 
-export const ToDoChild = ({ childType = "pink" }) => {
-  // Use childType ("pink" or "orange") to determine theme and storage key
-  const theme = childType; // will be passed down to PersonalTaskList and TaskCard
-  const localStorageKey = childType === "orange" ? "childOrangeTasks" : "childPersonalTasks";
+// Now we expect childId to be passed as a prop so we can use the same key as in ManageChildList
+export const ToDoChild = ({ childType = "pink", childId }) => {
+  const theme = childType; // for styling
+  // Use the same key that the parent uses:
+  const childStorageKey = `child_${childId}`;
+
   const backgroundClass =
     childType === "orange"
       ? "bg-gradient-to-b from-orange-200 via-orange-300 to-orange-100"
       : "bg-gradient-to-b from-pink-200 via-pink-300 to-pink-100";
   const characterImage = childType === "orange" ? characterOrange : characterPink;
 
+  // Instead of separate personal tasks state, load the child object
+  const [childData, setChildData] = useState({ personalTasks: [], assignedTasks: [] });
   const [addingTask, setAddingTask] = useState(false);
   const [isEditingTask, setEditingTask] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState(null);
-  const [personalTasks, setPersonalTasks] = useState([]);
-  const [assignedTasks, setAssignedTasks] = useState([]); // For tasks assigned by parent
 
-  const getPersonalTasks = JSON.parse(localStorage.getItem(localStorageKey));
+  // Load the child's full object from storage
   useEffect(() => {
-    setPersonalTasks(getPersonalTasks ? getPersonalTasks : []);
-  }, []);
+    const storedChild = JSON.parse(localStorage.getItem(childStorageKey));
+    console.log("ToDoChild useEffect, key:", childStorageKey, "storedChild:", storedChild);
+    if (storedChild) {
+      setChildData(storedChild);
+    } else {
+      const initial = { id: childId, name: "", theme: childType, personalTasks: [], assignedTasks: [] };
+      setChildData(initial);
+      localStorage.setItem(childStorageKey, JSON.stringify(initial));
+    }
+  }, [childId]);
 
   const createTask = (task) => {
     setAddingTask(false);
-    const updated = [...personalTasks, task];
-    setPersonalTasks(updated);
-    localStorage.setItem(localStorageKey, JSON.stringify(updated));
+    // Update only personalTasks
+    const updatedPersonal = [...childData.personalTasks, task];
+    const updatedChild = { ...childData, personalTasks: updatedPersonal };
+    setChildData(updatedChild);
+    localStorage.setItem(childStorageKey, JSON.stringify(updatedChild));
   };
 
   const deleteTask = (taskId) => {
-    const updatedTasks = personalTasks.filter((task) => task.taskId !== taskId);
-    setPersonalTasks(updatedTasks);
-    localStorage.setItem(localStorageKey, JSON.stringify(updatedTasks));
+    const updatedPersonal = childData.personalTasks.filter((task) => task.taskId !== taskId);
+    const updatedChild = { ...childData, personalTasks: updatedPersonal };
+    setChildData(updatedChild);
+    localStorage.setItem(childStorageKey, JSON.stringify(updatedChild));
   };
 
   const startEditingTask = (taskId) => {
-    const editingTask = personalTasks.find((task) => task.taskId === taskId);
+    const editingTask = childData.personalTasks.find((task) => task.taskId === taskId);
     setTaskToEdit(editingTask);
     setEditingTask(true);
-};
+  };
 
   const editTask = (newTask) => {
     setEditingTask(false);
-    const editTask = personalTasks.map((task) => {
+    const updatedPersonal = childData.personalTasks.map((task) => {
       if (task.taskId === taskToEdit.taskId) {
         return new Task(
           newTask.newTaskTitle,
@@ -66,24 +79,22 @@ export const ToDoChild = ({ childType = "pink" }) => {
       }
       return task;
     });
-    setPersonalTasks(editTask);
-    localStorage.setItem(localStorageKey, JSON.stringify(editTask));
+    const updatedChild = { ...childData, personalTasks: updatedPersonal };
+    setChildData(updatedChild);
+    localStorage.setItem(childStorageKey, JSON.stringify(updatedChild));
     setTaskToEdit(null);
   };
 
   const toggleCompletedStatus = (taskId) => {
-    const togglingTask = personalTasks.find((task) => task.taskId === taskId);
-    const toggleStatus = personalTasks.map((task) => {
-      if (task.taskId === togglingTask.taskId) {
-        return { ...task, taskStatus: !task.taskStatus }
-      }
-      return task;
-    });
-    setPersonalTasks(toggleStatus);
-    localStorage.setItem(localStorageKey, JSON.stringify(toggleStatus));
-    console.log(togglingTask.taskStatus)
-  }
+    const updatedPersonal = childData.personalTasks.map((task) =>
+      task.taskId === taskId ? { ...task, taskStatus: !task.taskStatus } : task
+    );
+    const updatedChild = { ...childData, personalTasks: updatedPersonal };
+    setChildData(updatedChild);
+    localStorage.setItem(childStorageKey, JSON.stringify(updatedChild));
+  };
 
+  // Render the view: pass the assigned tasks from childData.assignedTasks to the assignedTaskList
   const RenderView = () => {
     if (addingTask) {
       return (
@@ -91,7 +102,7 @@ export const ToDoChild = ({ childType = "pink" }) => {
           <CreateTaskCard
             onSave={createTask}
             onCancel={() => setAddingTask(false)}
-            theme={theme}  // thetheme is set based on childType ("pink" or "orange")
+            theme={theme}
           />
         </div>
       );
@@ -105,21 +116,20 @@ export const ToDoChild = ({ childType = "pink" }) => {
           />
         </div>
       );
-    }
-    else {
+    } else {
       return (
         <>
           <div className="flex-1 p-4">
-            <AssignedTaskList childType={childType} />
+            <AssignedTaskList childId={childId} childType={childType} />
           </div>
           <div className="flex-1 p-4">
             <PersonalTaskList
-              tasks={personalTasks}
+              tasks={childData.personalTasks}
               addTask={() => setAddingTask(true)}
               deleteTask={deleteTask}
-              onToggleStatus={toggleCompletedStatus} // Your toggle/edit functions here if needed
+              onToggleStatus={toggleCompletedStatus}
               onEdit={startEditingTask}
-              theme={theme}  // "pink" or "orange"
+              theme={theme}
             />
           </div>
         </>
@@ -127,24 +137,15 @@ export const ToDoChild = ({ childType = "pink" }) => {
     }
   };
 
-  {/* THERE ARE 3 SECTIONS
-    left: assigned taskls by parent to child
-    middle: the chil's personal tasks
-    right: the image of the characte  '
-    ofc the data and theme all depend on which child is selected (pink or orange)*/}
-
   return (
     <div className={`h-screen flex flex-col ${backgroundClass}`}>
-      <NavBar parent={false} childType={childType} /> {/* Pass childType now */}
+      <NavBar parent={false} childType={childType} />
       <div className="flex flex-1 flex-wrap gap-4 p-4">
         <RenderView />
         <div className="flex-1 p-4">
-          <Character
-            childType={childType}
-          />
+          <Character childType={childType} />
         </div>
       </div>
     </div>
   );
-
 };
