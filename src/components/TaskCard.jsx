@@ -22,6 +22,7 @@ export const TaskCard = ({ task, onEdit, onDelete, onToggleStatus, theme }) => {
         />
         <div>
           <h3 className="font-bold text-lg">{task.taskTitle}</h3>
+          <h4 className="font-bold text-md">Priority: {task.taskPriority}</h4>
           <p className="text-sm break-words w-full">
             {task.taskDescription.split(" ").slice(0, 100).join(" ")}
             {task.taskDescription.split(" ").length > 100 && "..."}
