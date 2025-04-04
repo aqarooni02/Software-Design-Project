@@ -1,7 +1,7 @@
 // sign up for new users
 
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { replace, useNavigate } from 'react-router-dom';
 
 export const SignUp = () => {
   // Keep track of the new user's info
@@ -15,7 +15,7 @@ export const SignUp = () => {
   // 2. take the user to their tasks (will chnage to the profile selection)
   const handleSignUp = (e) => {
     e.preventDefault();
-    navigate('/profile-selection');
+    navigate('/profile-selection', {replace: true});
   };
 
   return (
