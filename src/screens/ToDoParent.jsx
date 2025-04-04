@@ -125,7 +125,8 @@ export const ToDoParent = () => {
                             addTask={() => setAddingTask(true)}
                             deleteTask={deleteTask}
                             onToggleStatus={toggleCompletedStatus}
-                            editTask={startEditingTask}
+                            onEdit={startEditingTask}  // "onEdit" prop is passed here
+                            theme="blue"
                         />
                     </div>
                 </>
