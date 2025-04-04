@@ -15,7 +15,7 @@ export const SignIn = () => {
   // 2. take the user to their tasks (will chnage to the profile selection)
   const handleSignIn = (e) => {
     e.preventDefault();
-    navigate('/profile-selection');
+    navigate('/profile-selection', {replace: true});
   };
 
   return (
