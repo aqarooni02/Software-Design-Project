@@ -13,7 +13,7 @@ export const SignUp = () => {
   // check: might fix the routing
   // 1. prevent the page from refreshing
   // 2. take the user to their tasks (will chnage to the profile selection)
-  const handleSignIn = (e) => {
+  const handleSignUp = (e) => {
     e.preventDefault();
     navigate('/profile-selection');
   };
