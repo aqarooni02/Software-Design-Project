@@ -15,7 +15,7 @@ export const SignIn = () => {
   // 2. take the user to their tasks (will chnage to the profile selection)
   const handleSignIn = (e) => {
     e.preventDefault();
-    navigate('/profile-selection', {replace: true});
+    navigate('/profile-selection');
   };
 
   return (
@@ -85,7 +85,7 @@ export const SignIn = () => {
             <p className="text-center text-blue-900">
               Don't have an account?{' '}
               <a
-                onClick={() => navigate('/signup')}
+                onClick={() => navigate('/signup', { replace: true })}
                 className="text-blue-600 hover:text-blue-800 font-semibold transition-colors cursor-pointer"
               >
                 Sign up!

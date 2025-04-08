@@ -1,7 +1,7 @@
 // sign up for new users
 
 import React, { useState } from 'react';
-import { replace, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const SignUp = () => {
   // Keep track of the new user's info
@@ -15,7 +15,7 @@ export const SignUp = () => {
   // 2. take the user to their tasks (will chnage to the profile selection)
   const handleSignUp = (e) => {
     e.preventDefault();
-    navigate('/profile-selection', {replace: true});
+    navigate('/profile-selection');
   };
 
   return (
@@ -111,7 +111,7 @@ export const SignUp = () => {
             <p className="text-center text-blue-900">
               Already have an account?{' '}
               <a
-                onClick={() => navigate('/signin')}
+                onClick={() => navigate('/signin', { replace: true })}
                 className="text-blue-600 hover:text-blue-800 font-semibold transition-colors cursor-pointer"
               >
                 Sign in
