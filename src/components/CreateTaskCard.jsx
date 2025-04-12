@@ -68,7 +68,7 @@ export const CreateTaskCard = ({ onSave, onCancel, theme }) => {
               type="date"
               value={taskDate}
               onChange={(e) => setTaskDate(e.target.value)}
-              min={new Date().toISOString().split("T")[0]}
+              min={new Date().toLocaleDateString('en-CA')}
               className="w-full p-2 border rounded"
             />
           </div>

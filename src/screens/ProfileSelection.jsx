@@ -9,11 +9,11 @@ export const ProfileSelection = () => {
 
   const handleSelect = (character) => {
     if (character === "blue") {
-      navigate("/tasks"); // Parent's To Do view
+      navigate("/tasks", { replace: true }); // Parent's To Do view
     } else if (character === "pink") {
-      navigate("/child-tasks"); // Child pink To Do view
+      navigate("/child-tasks", { replace: true }); // Child pink To Do view
     } else if (character === "orange") {
-      navigate("/child-tasks-orange"); // Navigate to the orange child view
+      navigate("/child-tasks-orange", { replace: true }); // Navigate to the orange child view
     }
   };
 

@@ -14,7 +14,7 @@ export const NavBar = ({ parent, childType = "pink" }) => {
   return (
     <div className={`navbar ${bgClass} flex items-center justify-between px-3 py-2`}>
       <div className="flex gap-8">
-        <Link to="/profile-selection">
+        <Link to="/profile-selection" replace={true}>
           <img src={logo} className="max-h-10" alt="Homey Logo" />
         </Link>
         <div className="flex items-center gap-4">
