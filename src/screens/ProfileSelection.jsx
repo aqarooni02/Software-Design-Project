@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import characterBlue from "../assets/CharacterBlue.png";
 import characterPink from "../assets/CharacterPink.png";
 import characterOrange from "../assets/CharacterOrange.png";
+import { CloudsAndStars } from "../components/CloudsAndStars";
 
 export const ProfileSelection = () => {
   const navigate = useNavigate();
@@ -20,35 +21,7 @@ export const ProfileSelection = () => {
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#1a4b8c] via-[#90cdf4] to-white overflow-x-hidden ">
       {/* Cloud background (same as Landing) */}
-      <div className="cloudPane absolute inset-0">
-        {/* Stars in the sky */}
-        <div className="stars absolute inset-0">
-          {[...Array(30)].map((_, i) => (
-            <div key={i} className="star" id={`star${i + 1}`}></div>
-          ))}
-        </div>
-        {/* Clouds */}
-        {[1, 2, 3, 4, 5, 6, 7].map((cloudNum) => (
-          <div key={cloudNum} className="bigCloud" id={`cloud${cloudNum}`}>
-            <div className="largeCircle" id="circ1">
-              <div className="largeCircle" id="circ1shadow"></div>
-            </div>
-            <div className="middleCircle" id="circ2">
-              <div className="middleCircle" id="circ2shadow"></div>
-            </div>
-            <div className="middleCircle" id="circ3">
-              <div className="middleCircle" id="circ3shadow"></div>
-            </div>
-            <div className="smallCircle" id="circ4"></div>
-            <div className="smallCircle" id="circ5">
-              <div className="smallCircle" id="circ5shadow"></div>
-            </div>
-            <div className="smallCircle" id="circ6">
-              <div className="smallCircle" id="circ6shadow"></div>
-            </div>
-          </div>
-        ))}
-      </div>
+      <CloudsAndStars/>
 
       {/* Main content */}
       <h1 className="text-5xl text-white mb-10 relative ">
