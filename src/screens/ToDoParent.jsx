@@ -15,25 +15,32 @@ export const ToDoParent = () => {
     const [parentTasks, setParentTasks] = useState([]);
     const [childSelected, setChildSelected] = useState(null)
 
-    const getTasks = JSON.parse(localStorage.getItem("parentTasks"));
     useEffect(() => {
-        if (getTasks == null) {
+        const parent_data = JSON.parse(localStorage.getItem("parent_data"));
+        if (parent_data?.personalTasks == null) {
             setParentTasks([]);
         } else {
-            setParentTasks(getTasks);
+            setParentTasks(parent_data.personalTasks);
         }
     }, []);
 
+    const updateLocalStorageTasks = (newTasks) => {
+        const parent_data = JSON.parse(localStorage.getItem("parent_data")) || {};
+        parent_data.personalTasks = newTasks;
+        localStorage.setItem("parent_data", JSON.stringify(parent_data));
+    };
+
     const createTask = (task) => {
+        const updatedTasks = [...parentTasks, task];
         setAddingTask(false);
-        setParentTasks([...parentTasks, task]);
-        localStorage.setItem("parentTasks", JSON.stringify([...parentTasks, task]));
+        setParentTasks(updatedTasks);
+        updateLocalStorageTasks(updatedTasks);
     };
 
     const deleteTask = (taskId) => {
-        const deleteTask = parentTasks.filter((task) => task.taskId !== taskId);
-        setParentTasks(deleteTask);
-        localStorage.setItem("parentTasks", JSON.stringify(deleteTask));
+        const updatedTasks = parentTasks.filter((task) => task.taskId !== taskId);
+        setParentTasks(updatedTasks);
+        updateLocalStorageTasks(updatedTasks);
     };
 
     const startEditingTask = (taskId) => {
@@ -42,9 +49,7 @@ export const ToDoParent = () => {
         setEditingTask(true);
     };
 
-    // const manageChild = (childId) => {
 
-    // }
 
     const editTask = (newTask) => {
         setEditingTask(false);
@@ -62,22 +67,22 @@ export const ToDoParent = () => {
             return task;
         });
         setParentTasks(editTask);
-        localStorage.setItem("parentTasks", JSON.stringify(editTask));
+        updateLocalStorageTasks(editTask);
         setTaskToEdit(null);
     };
 
     const toggleCompletedStatus = (taskId) => {
         const togglingTask = parentTasks.find((task) => task.taskId === taskId);
         const toggleStatus = parentTasks.map((task) => {
-          if (task.taskId === togglingTask.taskId) {
-            return { ...task, taskStatus: !task.taskStatus }
-          }
-          return task;
+            if (task.taskId === togglingTask.taskId) {
+                return { ...task, taskStatus: !task.taskStatus }
+            }
+            return task;
         });
         setParentTasks(toggleStatus);
-        localStorage.setItem('parentTasks', JSON.stringify(toggleStatus));
+        updateLocalStorageTasks(toggleStatus);
         console.log(togglingTask.taskStatus)
-      }
+    }
 
     const RenderView = () => {
         if (addingTask) {
