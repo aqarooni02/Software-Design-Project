@@ -10,36 +10,33 @@ import { AssignedTaskList } from "../components/AssignedTasksList";
 import { Task } from "../classes/Task";
 import { Character } from "../components/Character";
 import { EditTaskCard } from "../components/EditTaskCard";
+import { useParams } from "react-router-dom";
 
 // Now we expect childId to be passed as a prop so we can use the same key as in ManageChildList
-export const ToDoChild = ({ childType = "pink", childId }) => {
-  const theme = childType; // for styling
-  // Use the same key that the parent uses:
+export const ToDoChild = () => {
+  const { childId } = useParams();
   const childStorageKey = `child_${childId}`;
+
+  const [childData, setChildData] = useState({ personalTasks: [], assignedTasks: [] });
+  const [childType, setChildType] = useState("pink"); // default theme
+  const [addingTask, setAddingTask] = useState(false);
+  const [isEditingTask, setEditingTask] = useState(false);
+  const [taskToEdit, setTaskToEdit] = useState(null);
+
+  useEffect(() => {
+    const storedChild = JSON.parse(localStorage.getItem(childStorageKey));
+    if (storedChild) {
+      setChildData(storedChild);
+      setChildType(storedChild.theme || "pink"); // fallback to pink
+    } else {
+      console.warn(`Child with ID ${childId} not found in localStorage.`);
+    }
+  }, [childId]);
 
   const backgroundClass =
     childType === "orange"
       ? "bg-gradient-to-b from-orange-200 via-orange-300 to-orange-100"
       : "bg-gradient-to-b from-pink-200 via-pink-300 to-pink-100";
-
-  // Instead of separate personal tasks state, load the child object
-  const [childData, setChildData] = useState({ personalTasks: [], assignedTasks: [] });
-  const [addingTask, setAddingTask] = useState(false);
-  const [isEditingTask, setEditingTask] = useState(false);
-  const [taskToEdit, setTaskToEdit] = useState(null);
-
-  // Load the child's full object from storage
-  useEffect(() => {
-    const storedChild = JSON.parse(localStorage.getItem(childStorageKey));
-    console.log("ToDoChild useEffect, key:", childStorageKey, "storedChild:", storedChild);
-    if (storedChild) {
-      setChildData(storedChild);
-    } else {
-      const initial = { id: childId, name: "", theme: childType, personalTasks: [], assignedTasks: [] };
-      setChildData(initial);
-      localStorage.setItem(childStorageKey, JSON.stringify(initial));
-    }
-  }, [childId]);
 
   const createTask = (task) => {
     setAddingTask(false);
@@ -101,7 +98,7 @@ export const ToDoChild = ({ childType = "pink", childId }) => {
           <CreateTaskCard
             onSave={createTask}
             onCancel={() => setAddingTask(false)}
-            theme={theme}
+            theme={childType}
           />
         </div>
       );
@@ -128,7 +125,7 @@ export const ToDoChild = ({ childType = "pink", childId }) => {
               deleteTask={deleteTask}
               onToggleStatus={toggleCompletedStatus}
               onEdit={startEditingTask}
-              theme={theme}
+              theme={childType}
             />
           </div>
         </>
@@ -138,7 +135,7 @@ export const ToDoChild = ({ childType = "pink", childId }) => {
 
   return (
     <div className={`h-screen flex flex-col ${backgroundClass}`}>
-      <NavBar parent={false} childType={childType} />
+      <NavBar parent={false} childType={childType} childId={childId} />
       <div className="flex flex-1 flex-wrap gap-4 p-4">
         <RenderView />
         <div className="flex-1 p-4">

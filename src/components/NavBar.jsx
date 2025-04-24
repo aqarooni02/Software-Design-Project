@@ -4,7 +4,7 @@ import logo from '../assets/HomeyLogo.png';
 import bell from '../assets/Bell.png';
 import user from '../assets/User-Circle.png';
 
-export const NavBar = ({ parent, childType = "pink" }) => {
+export const NavBar = ({ parent, childType, childId}) => {
   const bgClass = parent
     ? "bg-[#0151C2]"
     : childType === "orange"
@@ -18,7 +18,7 @@ export const NavBar = ({ parent, childType = "pink" }) => {
           <img src={logo} className="max-h-10" alt="Homey Logo" />
         </Link>
         <div className="flex items-center gap-4">
-          <Link to={parent ? "/tasks" : "/child-tasks"} className="text-white">
+          <Link to={parent ? "/tasks" : `/child-tasks/${childId}`} className="text-white">
             My To Do
           </Link>
           <Link to="/shared-view" className="text-white">
