@@ -1,34 +1,34 @@
 import React from "react";
 
-export const TaskCard = ({ task, onEdit, onDelete, onToggleStatus, theme }) => {
+export const TaskCard = ({ task, onEdit, onDelete, onToggleStatus, theme, noToggle = false }) => {
   const bgClass =
     theme === "orange"
       ? "bg-orange-400"
       : theme === "pink"
-      ? "bg-pink-400"
-      : "bg-blue-400";
+        ? "bg-pink-400"
+        : "bg-blue-400";
   const borderClass =
     theme === "orange"
       ? "border-b-orange-700"
       : theme === "pink"
-      ? "border-b-pink-700"
-      : "border-b-blue-700";
+        ? "border-b-pink-700"
+        : "border-b-blue-700";
   const buttonClass =
     theme === "orange"
       ? "bg-orange-500"
       : theme === "pink"
-      ? "bg-pink-500"
-      : "bg-blue-500";
+        ? "bg-pink-500"
+        : "bg-blue-500";
 
   return (
     <div className={`flex items-center justify-between p-4 ${bgClass} rounded-lg shadow-md ${borderClass} border-b-2 text-white`}>
       <div className="flex items-center">
-        <input
+        {!noToggle && <input
           type="checkbox"
           checked={task.taskStatus}
           onChange={() => onToggleStatus && onToggleStatus(task.taskId)}
           className="mr-2 vertical-center"
-        />
+        />}
         <div>
           <h3 className="font-bold text-lg">{task.taskTitle}</h3>
           <h4 className="font-bold text-md">Priority: {task.taskPriority}</h4>

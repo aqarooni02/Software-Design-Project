@@ -60,7 +60,7 @@ export const ManageChildList = ({ childId }) => {
           {assignedTasks.length !== 0 ? (
             <div className="flex flex-col gap-2 pb-2">
               {assignedTasks.map((task) => (
-                <TaskCard key={task.taskId} task={task} onDelete={handleDelete} theme="blue" />
+                <TaskCard key={task.taskId} task={task} onDelete={handleDelete} theme="blue" noToggle/>
               ))}
             </div>
           ) : (
