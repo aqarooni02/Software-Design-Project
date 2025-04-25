@@ -1,6 +1,6 @@
 import React from "react";
 
-export const TaskCard = ({ task, onEdit, onDelete, onToggleStatus, theme, noToggle = true }) => {
+export const TaskCard = ({ task, onEdit, onDelete, onToggleStatus, theme, noToggle = false }) => {
   const bgClass =
     theme === "orange"
       ? "bg-orange-400"
