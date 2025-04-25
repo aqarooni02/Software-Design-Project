@@ -11,6 +11,18 @@ export const AssignedTaskList = ({ childId, childType }) => {
     setAssignedTasks(newTasks);
   }, [childId, localStorageKey]);
 
+  // fixing the toggle completed status function
+  const toggleCompletedStatus = (taskId) => {
+    const updatedTasks = assignedTasks.map((task) =>
+      task.taskId === taskId ? { ...task, taskStatus: !task.taskStatus } : task
+    );
+    setAssignedTasks(updatedTasks);
+
+    const storedChild = JSON.parse(localStorage.getItem(localStorageKey)) || {};
+    storedChild.assignedTasks = updatedTasks;
+    localStorage.setItem(localStorageKey, JSON.stringify(storedChild));
+  };
+
   const headingClasses =
     childType === "orange"
       ? "text-2xl font-bold mb-2 text-orange-700"
@@ -28,7 +40,12 @@ export const AssignedTaskList = ({ childId, childType }) => {
         {assignedTasks.length !== 0 ? (
           <div className="flex flex-col gap-2 pb-2">
             {assignedTasks.map((task) => (
-              <TaskCard key={task.taskId} task={task} theme={childType} />
+              <TaskCard
+                key={task.taskId}
+                task={task}
+                onToggleStatus={toggleCompletedStatus} // Pass the toggle function here
+                theme={childType}
+              />
             ))}
           </div>
         ) : (
