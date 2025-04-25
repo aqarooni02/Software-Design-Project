@@ -8,7 +8,7 @@ export const NavBar = ({ parent, childType, childId}) => {
   const bgClass = parent
     ? "bg-[#0151C2]"
     : childType === "orange"
-      ? "bg-orange-500"
+      ? "bg-orange-400"
       : "bg-pink-500";
 
   return (

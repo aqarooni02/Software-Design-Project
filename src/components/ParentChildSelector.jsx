@@ -1,10 +1,7 @@
-
-import { ChildBubble } from "./ChildBubble"
+import { ChildBubble } from "./ChildBubble";
 import { useCallback, useEffect, useState } from "react";
 
-
 export const ParentChildSelector = ({ childSelected, setSelectedChild }) => {
-    // console.log(task)
     const [children, setChildren] = useState([]);
 
     const loadChildren = useCallback(() => {
@@ -26,34 +23,29 @@ export const ParentChildSelector = ({ childSelected, setSelectedChild }) => {
         loadChildren();
     }, [loadChildren]);
 
-    console.log(children)
-
     return (
-        <>
-            <h2 className="text-2xl font-bold mb-2 ">Select Child</h2>
-            <div className="max-h-3/4 p-4 overflow-y-auto [&::-webkit-scrollbar]:w-0">
-               
-
-                {!childSelected ?
-
-                    <div className="flex flex-wrap gap-8 justify-around">
-                        {children.map((child, i) =>
-                            <ChildBubble key={i} childId={child.id} childName={child.name} childTheme={child.theme} onSelect={setSelectedChild} />
-                        )}
-
-                    </div>
-
-                    :
+        <div className="flex flex-col items-center justify-start min-h-screen py-8">
+            <h2 className="text-2xl font-bold mb-4 text-center">Select Child</h2>
+            <div className="flex flex-col items-center gap-8 p-4 overflow-y-auto max-h-[75vh] [&::-webkit-scrollbar]:w-0">
+                {!childSelected ? (
+                    children.map((child, i) => (
+                        <ChildBubble
+                            key={i}
+                            childId={child.id}
+                            childName={child.name}
+                            childTheme={child.theme}
+                            onSelect={setSelectedChild}
+                        />
+                    ))
+                ) : (
                     <button
-                        className="bg-blue-500 px-4 py-1 rounded text-white "
+                        className="bg-blue-500 px-4 py-2 rounded text-white"
                         onClick={() => setSelectedChild(null)}
                     >
                         Back
                     </button>
-                }
-
+                )}
             </div>
-
-        </>
-    )
-}
+        </div>
+    );
+};

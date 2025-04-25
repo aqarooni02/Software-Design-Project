@@ -10,16 +10,16 @@ export const PersonalTaskList = ({ tasks, addTask, deleteTask, onToggleStatus, o
 
   let boxClasses, headingClasses, addButtonClasses;
   if (theme === "orange") {
-    boxClasses = "min-h-3/4 max-h-3/4 bg-orange-400/40 rounded-3xl border-2 border-orange-400 p-4 overflow-y-auto [&::-webkit-scrollbar]:w-0";
-    headingClasses = "text-2xl font-bold mb-2 text-orange-700";
-    addButtonClasses = "w-full bg-orange-500 text-white py-2 rounded-lg text-lg font-semibold";
+    boxClasses = "min-h-3/4 max-h-3/4 bg-orange-300/40 rounded-3xl border-2 border-orange-400 p-4 overflow-y-auto [&::-webkit-scrollbar]:w-0";
+    headingClasses = "text-2xl font-bold mb-2 text-orange-500 text-center";
+    addButtonClasses = "w-full bg-orange-400 text-white py-2 rounded-lg text-lg font-semibold";
   } else if (theme === "pink") {
     boxClasses = "min-h-3/4 max-h-3/4 bg-pink-400/40 rounded-3xl border-2 border-pink-400 p-4 overflow-y-auto [&::-webkit-scrollbar]:w-0";
-    headingClasses = "text-2xl font-bold mb-2 text-pink-700";
+    headingClasses = "text-2xl font-bold mb-2 text-pink-500 text-center";
     addButtonClasses = "w-full bg-pink-500 text-white py-2 rounded-lg text-lg font-semibold";
   } else {
     boxClasses = "min-h-3/4 max-h-3/4 bg-blue-400/40 rounded-3xl border-2 border-blue-400 p-4 overflow-y-auto [&::-webkit-scrollbar]:w-0";
-    headingClasses = "text-2xl font-bold mb-2 text-blue-700";
+    headingClasses = "text-2xl font-bold mb-2 text-blue-500 text-center";
     addButtonClasses = "w-full bg-blue-500 text-white py-2 rounded-lg text-lg font-semibold";
   }
 

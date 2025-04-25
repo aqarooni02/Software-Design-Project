@@ -3,7 +3,7 @@ import React from "react";
 export const TaskCard = ({ task, onEdit, onDelete, onToggleStatus, theme, noToggle = false }) => {
   const bgClass =
     theme === "orange"
-      ? "bg-orange-400"
+      ? "bg-orange-300"
       : theme === "pink"
       ? "bg-pink-400"
       : "bg-blue-400";

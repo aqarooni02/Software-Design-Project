@@ -140,7 +140,7 @@ export const ToDoParent = () => {
     };
 
     return (
-        <div className="h-screen flex flex-col">
+        <div className="h-screen flex flex-col bg-white"> {/* Changed bg-blue to bg-white */}
             <NavBar parent={true} />
             <div className="flex flex-1 flex-wrap gap-4 p-4">
                 <RenderView />

@@ -25,12 +25,12 @@ export const AssignedTaskList = ({ childId, childType }) => {
 
   const headingClasses =
     childType === "orange"
-      ? "text-2xl font-bold mb-2 text-orange-700"
-      : "text-2xl font-bold mb-2 text-pink-700";
+      ? "text-2xl font-bold mb-2 text-orange-500 text-center"
+      : "text-2xl font-bold mb-2 text-pink-500 text-center";
 
   const boxClasses =
     childType === "orange"
-      ? "h-3/4 bg-orange-400/40 rounded-3xl border-2 border-orange-400 p-4 overflow-y-auto"
+      ? "h-3/4 bg-orange-300/40 rounded-3xl border-2 border-orange-400 p-4 overflow-y-auto"
       : "h-3/4 bg-pink-400/40 rounded-3xl border-2 border-pink-400 p-4 overflow-y-auto";
 
   return (

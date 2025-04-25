@@ -33,10 +33,7 @@ export const ToDoChild = () => {
     }
   }, [childId]);
 
-  const backgroundClass =
-    childType === "orange"
-      ? "bg-gradient-to-b from-orange-200 via-orange-300 to-orange-100"
-      : "bg-gradient-to-b from-pink-200 via-pink-300 to-pink-100";
+  const backgroundClass = "bg-white";
 
   const createTask = (task) => {
     setAddingTask(false);
