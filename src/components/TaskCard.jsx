@@ -1,69 +1,65 @@
 import React from "react";
+import { FlagIcon as OutlineFlagIcon } from "@heroicons/react/24/outline";
+import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid"; // Import icons for edit and delete
 
 export const TaskCard = ({ task, onEdit, onDelete, onToggleStatus, theme, noToggle = false }) => {
-  const bgClass =
-    theme === "orange"
-      ? "bg-orange-300"
-      : theme === "pink"
-      ? "bg-pink-400"
-      : "bg-blue-400";
-  const borderClass =
-    theme === "orange"
-      ? "border-b-orange-700"
-      : theme === "pink"
-      ? "border-b-pink-700"
-      : "border-b-blue-700";
-  const buttonClass =
-    theme === "orange"
-      ? "bg-orange-500"
-      : theme === "pink"
-      ? "bg-pink-500"
-      : "bg-blue-500";
+  // Priority-based styles
+  const priorityColors = {
+    High: "border-red-500",
+    Medium: "border-amber-500",
+    Low: "border-green-500",
+  };
 
-  //  strikethrough class if task is completed
-  const textClass = task.taskStatus ? "line-through opacity-50" : "";
+  const priorityColor = priorityColors[task.taskPriority] || "border-gray-300";
+
+  // Completed task styling
+  const textClass = task.taskStatus ? "line-through opacity-75" : "";
 
   return (
-    <div className={`flex items-center justify-between p-4 ${bgClass} rounded-lg shadow-md ${borderClass} border-b-2 text-white`}>
-      <div className="flex items-center">
-        {!noToggle && (
-          <input
-            type="checkbox"
-            checked={task.taskStatus}
-            onChange={() => onToggleStatus && onToggleStatus(task.taskId)}
-            className="mr-2 vertical-center"
-          />
-        )}
-        <div>
-          <h3 className={`font-bold text-lg ${textClass}`}>{task.taskTitle}</h3>
-          <h4 className={`font-bold text-md ${textClass}`}>Priority: {task.taskPriority}</h4>
-          <p className={`text-sm break-words w-full ${textClass}`}>
-            {task.taskDescription.split(" ").slice(0, 100).join(" ")}
-            {task.taskDescription.split(" ").length > 100 && "..."}
-          </p>
+    <div
+      className={`flex flex-col gap-4 p-4 bg-white rounded-lg shadow-md border-l-4 ${priorityColor} hover:bg-gray-50 transition-all duration-150 min-w-[500px]`} // Reduced min-w
+    >
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          {!noToggle && (
+            <input
+              type="checkbox"
+              checked={task.taskStatus}
+              onChange={() => onToggleStatus && onToggleStatus(task.taskId)}
+              className="w-6 h-6 accent-green-500 rounded-full border-2 border-gray-300 hover:scale-110 transition-transform duration-150"
+            />
+          )}
+          <h3 className={`font-semibold text-lg ${textClass} text-black`}>{task.taskTitle}</h3> {/* Set task title to black */}
+        </div>
+        <div className="flex gap-2">
+          {onEdit && (
+            <button
+              className="flex items-center justify-center text-blue-500 hover:text-blue-700 transition-all duration-150"
+              onClick={() => onEdit(task.taskId)}
+            >
+              <PencilIcon className="w-5 h-5" /> {/* Blue pencil icon */}
+            </button>
+          )}
+          {onDelete && (
+            <button
+              className="flex items-center justify-center text-red-500 hover:text-red-700 transition-all duration-150"
+              onClick={() => onDelete(task.taskId)}
+            >
+              <TrashIcon className="w-5 h-5" /> {/* Red bin icon */}
+            </button>
+          )}
         </div>
       </div>
-      {(onEdit || onDelete) && (
-        <div className="text-right">
-          <p className={`text-sm font-semibold ${textClass}`}>Due: {task.taskDate}</p>
-          <div className="flex gap-2 mt-2">
-            {onEdit && (
-              <button
-                className={`${buttonClass} px-4 py-1 rounded`}
-                onClick={() => onEdit(task.taskId)}
-              >
-                Edit
-              </button>
-            )}
-            {onDelete && (
-              <button
-                className="bg-red-500 px-4 py-1 rounded"
-                onClick={() => onDelete(task.taskId)}
-              >
-                Delete
-              </button>
-            )}
-          </div>
+      <div className="flex items-center justify-between text-sm text-gray-600"> {/* Set metadata to gray */}
+        <div className="flex items-center gap-2">
+          <OutlineFlagIcon className="w-5 h-5 text-gray-500" />
+          <span>{task.taskPriority}</span>
+        </div>
+        <span>{task.taskDate}</span>
+      </div>
+      {task.taskDescription && (
+        <div className="p-4 bg-[#F0F9FF] rounded-md text-gray-700 text-sm">
+          {task.taskDescription}
         </div>
       )}
     </div>

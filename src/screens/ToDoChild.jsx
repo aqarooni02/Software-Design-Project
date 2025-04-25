@@ -37,7 +37,6 @@ export const ToDoChild = () => {
 
   const createTask = (task) => {
     setAddingTask(false);
-    // Update only personalTasks
     const updatedPersonal = [...childData.personalTasks, task];
     const updatedChild = { ...childData, personalTasks: updatedPersonal };
     setChildData(updatedChild);
@@ -87,16 +86,20 @@ export const ToDoChild = () => {
     localStorage.setItem(childStorageKey, JSON.stringify(updatedChild));
   };
 
-  // Render the view: pass the assigned tasks from childData.assignedTasks to the assignedTaskList
   const RenderView = () => {
     if (addingTask) {
       return (
-        <div className="flex-2 p-4">
-          <CreateTaskCard
-            onSave={createTask}
-            onCancel={() => setAddingTask(false)}
-            theme={childType}
-          />
+        <div className="flex flex-1 gap-4">
+          <div className="flex-[2] p-4">
+            <CreateTaskCard
+              onSave={createTask}
+              onCancel={() => setAddingTask(false)}
+              theme={childType}
+            />
+          </div>
+          <div className="flex-[1] p-4 flex items-center justify-center">
+            <Character childType={childType} name={childData.name} />
+          </div>
         </div>
       );
     } else if (isEditingTask) {
@@ -111,11 +114,14 @@ export const ToDoChild = () => {
       );
     } else {
       return (
-        <>
-          <div className="flex-1 p-4">
+        <div className="flex flex-1 gap-4">
+          {/* Assigned Tasks List */}
+          <div className="flex-[1.5] p-4">
             <AssignedTaskList childId={childId} childType={childType} />
           </div>
-          <div className="flex-1 p-4">
+
+          {/* Personal Tasks List */}
+          <div className="flex-[1.5] p-4">
             <PersonalTaskList
               tasks={childData.personalTasks}
               addTask={() => setAddingTask(true)}
@@ -125,7 +131,12 @@ export const ToDoChild = () => {
               theme={childType}
             />
           </div>
-        </>
+
+          {/* Character Section */}
+          <div className="flex-[1] p-4 flex items-center justify-center">
+            <Character childType={childType} name={childData.name} />
+          </div>
+        </div>
       );
     }
   };
@@ -133,11 +144,8 @@ export const ToDoChild = () => {
   return (
     <div className={`h-screen flex flex-col ${backgroundClass}`}>
       <NavBar parent={false} childType={childType} childId={childId} />
-      <div className="flex flex-1 flex-wrap gap-4 p-4">
+      <div className="flex flex-1 flex-col gap-4 p-4">
         <RenderView />
-        <div className="flex-1 p-4">
-          <Character childType={childType} />
-        </div>
       </div>
     </div>
   );

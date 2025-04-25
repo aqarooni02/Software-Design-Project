@@ -91,6 +91,7 @@ export const ToDoParent = () => {
                     <CreateTaskCard
                         onSave={createTask}
                         onCancel={() => setAddingTask(false)}
+                        theme="blue" // Explicitly set theme to blue for the parent
                     />
                 </div>
             );
@@ -121,16 +122,16 @@ export const ToDoParent = () => {
         } else {
             return (
                 <>
-                    <div className="flex-1 p-4 text-blue-700">
+                    <div className="flex-[2] p-4 text-blue-700"> {/* Changed flex-1 to flex-[2] */}
                         <ParentChildSelector setSelectedChild={setChildSelected} />
                     </div>
-                    <div className="flex-1 p-4 text-blue-700">
+                    <div className="flex-[3] p-4 text-blue-700"> {/* Changed flex-1 to flex-[3] */}
                         <PersonalTaskList
                             tasks={parentTasks}
                             addTask={() => setAddingTask(true)}
                             deleteTask={deleteTask}
                             onToggleStatus={toggleCompletedStatus}
-                            onEdit={startEditingTask}  // "onEdit" prop is passed here
+                            onEdit={startEditingTask}
                             theme="blue"
                         />
                     </div>
@@ -145,7 +146,7 @@ export const ToDoParent = () => {
             <div className="flex flex-1 flex-wrap gap-4 p-4">
                 <RenderView />
                 <div className="flex-1 p-4">
-                    <Character />
+                    <Character name="Parent" />
                 </div>
             </div>
         </div>

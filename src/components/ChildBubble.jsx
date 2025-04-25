@@ -27,7 +27,7 @@ export const ChildBubble = ({ childId, childName, childTheme, onSelect }) => {
                     alt={childName}
                 />
             </div>
-            <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-center">{childName}</h1>
-        </div>
+            <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-center text-black">{childName}</h1>
+            </div>
     );
 };

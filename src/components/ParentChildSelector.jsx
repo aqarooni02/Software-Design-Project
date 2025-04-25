@@ -25,7 +25,7 @@ export const ParentChildSelector = ({ childSelected, setSelectedChild }) => {
 
     return (
         <div className="flex flex-col items-center justify-start min-h-screen py-8">
-            <h2 className="text-2xl font-bold mb-4 text-center">Select Child</h2>
+            <h2 className="text-2xl font-bold mb-4 text-center text-black">Select Child</h2> {/* Set heading to black */}
             <div className="flex flex-col items-center gap-8 p-4 overflow-y-auto max-h-[75vh] [&::-webkit-scrollbar]:w-0">
                 {!childSelected ? (
                     children.map((child, i) => (

@@ -57,7 +57,7 @@ export const ProfileSelection = () => {
       {/* Main content */}
       {!addingChild ?
         <>
-          <h1 className="text-5xl text-white mb-10 relative ">
+          <h1 className="text-5xl text-black mb-10 relative ">
             Select Your Profile
           </h1>
           <div className="flex flex-col md:flex-row md:flex-wrap md:justify-center gap-12 overflow-y-auto max-h-dvh p-4 mb-4 [&::-webkit-scrollbar]:w-0">

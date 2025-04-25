@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { Task } from "../classes/Task";
+import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/solid"; // Import icons
 
 export const CreateTaskCard = ({ onSave, onCancel, theme }) => {
+  console.log("CreateTaskCard rendered with theme:", theme); // Debug log
+
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDate, setTaskDate] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
@@ -12,6 +15,7 @@ export const CreateTaskCard = ({ onSave, onCancel, theme }) => {
       alert("Please fill in all fields!");
       return;
     }
+    console.log("Saving task:", { taskTitle, taskDate, taskDescription, taskPriority }); // Debug log
     onSave(
       new Task(
         taskTitle,
@@ -21,71 +25,60 @@ export const CreateTaskCard = ({ onSave, onCancel, theme }) => {
         false // Default to not completed
       )
     );
-    // Clear inputs after saving
-    setTaskTitle("");
-    setTaskDate("");
-    setTaskDescription("");
-    setTaskPriority("Medium");
   };
 
-  // Theme-dependent classes.
-  const cardBg =
-    theme === "orange"
-      ? "bg-orange-400/40"
-      : theme === "pink"
-      ? "bg-pink-400/40"
-      : "bg-blue-400/40";
-  const cardBorder =
-    theme === "orange"
-      ? "border-orange-400"
-      : theme === "pink"
-      ? "border-pink-400"
-      : "border-blue-400";
-  const cardText =
-    theme === "orange"
-      ? "text-orange-700"
-      : theme === "pink"
-      ? "text-pink-700"
-      : "text-blue-700";
-
   return (
-    <>
-      <div className={`${cardBg} rounded-3xl border-2 ${cardBorder} p-4 ${cardText}`}>
-        <h2 className="text-2xl font-bold mb-2">Create New Task</h2>
-        <div className="grid grid-cols-2 gap-4 [&_*:not(label):not(div)]:bg-white [&_*:not(label):not(div)]:text-black">
-          <div className="col-1">
-            <label>Task Title</label>
+    <div className="flex items-center justify-center min-h-screen bg-white-100"> 
+      <div className="p-12 rounded-3xl shadow-2xl bg-white border-4 border-gray-300 max-w-3xl w-full"> {/* White outer box */}
+        <h2
+          className={`text-4xl font-bold mb-8 text-${
+            theme === "blue" ? "blue-700" : `${theme}-700`
+          } text-center`}
+        >
+          Create New Task
+        </h2>
+        <div className="grid grid-cols-2 gap-6">
+          {/* Task Title */}
+          <div>
+            <label className="block text-lg font-medium text-gray-700">Task Title</label>
             <input
               type="text"
               value={taskTitle}
               onChange={(e) => setTaskTitle(e.target.value)}
-              className="w-full p-2 border rounded"
+              className="w-full p-4 border rounded-lg text-black"
+              placeholder="Enter task title"
             />
           </div>
-          <div className="col-2">
-            <label>Date</label>
+
+          {/* Due Date */}
+          <div>
+            <label className="block text-lg font-medium text-gray-700">Date</label>
             <input
               type="date"
               value={taskDate}
               onChange={(e) => setTaskDate(e.target.value)}
-              min={new Date().toLocaleDateString('en-CA')}
-              className="w-full p-2 border rounded"
+              className="w-full p-4 border rounded-lg text-black"
             />
           </div>
-          <div className="col-1">
-            <label>Description</label>
+
+          {/* Description */}
+          <div className="col-span-2">
+            <label className="block text-lg font-medium text-gray-700">Description</label>
             <textarea
               value={taskDescription}
               onChange={(e) => setTaskDescription(e.target.value)}
-              className="w-full p-2 border rounded h-20"
+              className="w-full p-4 border rounded-lg text-black"
+              placeholder="Enter task description"
             />
           </div>
-          <div className="col-2">
-            <label>Priority</label>
+
+          {/* Priority */}
+          <div>
+            <label className="block text-lg font-medium text-gray-700">Priority</label>
             <select
               value={taskPriority}
               onChange={(e) => setTaskPriority(e.target.value)}
-              className="w-full p-2 border rounded"
+              className="w-full p-4 border rounded-lg text-black"
             >
               <option value="Low">Low Priority</option>
               <option value="Medium">Medium Priority</option>
@@ -93,21 +86,25 @@ export const CreateTaskCard = ({ onSave, onCancel, theme }) => {
             </select>
           </div>
         </div>
+
+        {/* Buttons */}
+        <div className="flex gap-6 mt-8 justify-center">
+          <button
+            onClick={onCancel}
+            className="flex items-center gap-2 py-3 px-6 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all"
+          >
+            <XCircleIcon className="w-6 h-6" />
+            Cancel
+          </button>
+          <button
+            onClick={handleSave}
+            className="flex items-center gap-2 py-3 px-6 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-all"
+          >
+            <CheckCircleIcon className="w-6 h-6" />
+            Save
+          </button>
+        </div>
       </div>
-      <div className="flex gap-2 mt-2 justify-center">
-        <button
-          className="bg-green-500 text-white px-4 py-1 rounded w-full"
-          onClick={handleSave}
-        >
-          Save
-        </button>
-        <button
-          className="bg-red-500 text-white px-4 py-1 rounded w-full"
-          onClick={onCancel}
-        >
-          Cancel
-        </button>
-      </div>
-    </>
+    </div>
   );
 };

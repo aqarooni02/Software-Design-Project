@@ -28,14 +28,15 @@ export const AssignedTaskList = ({ childId, childType }) => {
       ? "text-2xl font-bold mb-2 text-orange-500 text-center"
       : "text-2xl font-bold mb-2 text-pink-500 text-center";
 
+
   const boxClasses =
     childType === "orange"
-      ? "h-3/4 bg-orange-300/40 rounded-3xl border-2 border-orange-400 p-4 overflow-y-auto"
-      : "h-3/4 bg-pink-400/40 rounded-3xl border-2 border-pink-400 p-4 overflow-y-auto";
+      ? "h-3/4 bg-white-300/40 rounded-3xl border-2 border-orange-400 p-4 overflow-y-auto min-w-[600px]" // Reduced min-w
+      : "h-3/4 bg-white-400/40 rounded-3xl border-2 border-pink-400 p-4 overflow-y-auto min-w-[600px]"; // Reduced min-w
 
   return (
     <>
-      <h2 className={headingClasses}>Assigned by Parent</h2>
+      <h2 className={headingClasses.replace(/text-\w+-500/, "text-black")}>Assigned by Parent</h2> {/* Set heading to black */}
       <div className={boxClasses}>
         {assignedTasks.length !== 0 ? (
           <div className="flex flex-col gap-2 pb-2">
@@ -43,13 +44,14 @@ export const AssignedTaskList = ({ childId, childType }) => {
               <TaskCard
                 key={task.taskId}
                 task={task}
-                onToggleStatus={toggleCompletedStatus} // Pass the toggle function here
+                onToggleStatus={toggleCompletedStatus}
                 theme={childType}
               />
             ))}
           </div>
         ) : (
-          <h2 className="text-xl font-bold mb-2">No tasks assigned yet!</h2>
+          // Set empty state text to gray
+          <h2 className="text-xl font-bold mb-2 text-gray-500 text-center">No tasks assigned yet!</h2>
         )}
       </div>
     </>
