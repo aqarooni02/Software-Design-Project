@@ -1,11 +1,11 @@
 // I used the cloud animation idea from: https://codepen.io/Blando/pen/xGdLgQ
 // But I gave the clouds a different  look while keeping the same animation concept
-
+// gradient for ref bg-gradient-to-r from-blue-600 via-pink-500 to-orange-500 text-transparent bg-clip-text block mt-4
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import characterBlue from '../assets/CharacterBlue.png';
 import { CloudsAndStars } from '../components/CloudsAndStars';
-
+  
 export const Landing = () => {
   const navigate = useNavigate();
 
@@ -70,13 +70,13 @@ export const Landing = () => {
               <div className="text-center"> 
                 <h1 className="text-6xl sm:text-8xl font-bold text-blue-900">
                   Welcome to
-                  <span className="bg-gradient-to-r from-blue-600 via-pink-500 to-orange-500 text-transparent bg-clip-text block mt-4">
+                  <h2 className="text-6xl sm:text-8xl font-bold text-blue-900 "> 
                     HOMEY
-                  </span>
+                  </h2>
                 </h1>
               </div>
 
-              <p className="text-xl sm:text-2xl text-white leading-relaxed text-center max-w-3xl mx-auto">
+              <p className="text-xl sm:text-2xl text-blue-900 leading-relaxed text-center max-w-3xl mx-auto">
                 Keep your household running smoothly with an easy-to-use task manager designed for families.
               </p>
 
@@ -132,7 +132,7 @@ export const Landing = () => {
               {/* Button */}
               <button
                 onClick={handleGetStarted}
-                className="bg-gradient-to-r from-blue-600 via-pink-500 to-orange-500 text-white 
+                className="bg-blue-900 text-white 
                 px-10 sm:px-20 py-5 sm:py-7 rounded-full text-2xl sm:text-3xl font-semibold 
                 hover:scale-105 transition-all duration-300 transform hover:-translate-y-1 
                 shadow-2xl border border-white/20 hover:shadow-pink-500/20 mx-auto w-2/3"
@@ -148,7 +148,7 @@ export const Landing = () => {
             <img
               src={characterBlue}
               alt="Homey Character"
-              className="w-[72rem] h-[72rem] object-contain animate-float relative z-10 drop-shadow-2xl"
+              className="w-[52rem] h-[52rem] object-contain animate-float relative z-10 drop-shadow-2xl"
             />
           </div>
         </div>

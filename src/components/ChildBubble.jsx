@@ -19,7 +19,7 @@ export const ChildBubble = ({ childId, childName, childTheme, onSelect }) => {
             <div
                 className={`rounded-full border-4 shadow-2xl ${
                     childTheme === "pink" ? "bg-pink-300 border-pink-400" : "bg-orange-300 border-orange-400"
-                } w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-52 lg:h-52`}
+                } w-27 h-27 sm:w-31 sm:h-31 md:w-35 md:h-35 lg:w-39 lg:h-39`}
             >
                 <img
                     src={resolveImage(childTheme)}

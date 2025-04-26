@@ -146,7 +146,7 @@ export const ToDoParent = () => {
             <div className="flex flex-1 flex-wrap gap-4 p-4">
                 <RenderView />
                 <div className="flex-1 p-4">
-                    <Character name="Parent" />
+                    <Character name="Parent" size="small" /> {/* Pass a size prop */}
                 </div>
             </div>
         </div>

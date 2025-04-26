@@ -57,7 +57,7 @@ export const ProfileSelection = () => {
       {/* Main content */}
       {!addingChild ?
         <>
-          <h1 className="text-5xl text-black mb-10 relative ">
+          <h1 className="text-4xl text-black mb-10 relative ">
             Select Your Profile
           </h1>
           <div className="flex flex-col md:flex-row md:flex-wrap md:justify-center gap-12 overflow-y-auto max-h-dvh p-4 mb-4 [&::-webkit-scrollbar]:w-0">
@@ -69,41 +69,40 @@ export const ProfileSelection = () => {
               <img
                 src={characterBlue}
                 alt="Character Blue"
-                className="w-[24rem] h-[24rem] object-contain animate-float-slow"
+                className="w-[16rem] h-[16rem] object-contain animate-float-slow"
               />
-              <p className="mt-4 text-center text-2xl font-semibold text-blue-900">
+              <p className="mt-4 text-center text-2xl font-poppins text-black">
                 Parent
               </p>
             </div>
             {children.map((child, i) => {
               return (
-                <div key={i}
+                <div
+                  key={i}
                   onClick={() => handleSelect(child.id)}
                   className="cursor-pointer transform transition duration-300 hover:scale-110"
                 >
                   <img
                     src={resolveImage(child.theme)}
-                    alt="Character Pink"
-                    className="w-[24rem] h-[24rem] object-contain animate-float-slow"
+                    alt="Character"
+                    className="w-[16rem] h-[16rem] object-contain animate-float-slow"
                   />
-                  <p className={`mt-4 text-center text-2xl font-semibold text-${child.theme}-900`}>
+                  <p className="mt-4 text-center text-2xl font-poppins text-black">
                     {child.name}
                   </p>
                 </div>
-              )
-
+              );
             })}
-
             <div
               onClick={() => setAddingChild(true)}
               className="cursor-pointer transform transition duration-300 hover:scale-110"
             >
               <img
                 src={characterAdd}
-                alt="Character Pink"
-                className="w-[24rem] h-[24rem] object-contain animate-float-slow"
+                alt="Add Character"
+                className="w-[16rem] h-[16rem] object-contain animate-float-slow"
               />
-              <p className="mt-4 text-center text-2xl font-semibold text-blue-900">
+              <p className="mt-4 text-center text-2xl font-poppins text-black">
                 Add Child
               </p>
             </div>

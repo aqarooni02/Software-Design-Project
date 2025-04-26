@@ -22,7 +22,7 @@ export const Character = ({ childType, name = "Parent" }) => {
             </div>
 
             {/* Character Image */}
-            <div className="mt-40 w-[40rem] h-[55rem]"> {/* Lowered character and adjusted size */}
+            <div className="mt-40 w-[30rem] h-[48rem]"> {/* size */}
                 <img
                     src={characterImage}
                     alt="Homey Character"

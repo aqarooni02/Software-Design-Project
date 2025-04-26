@@ -25,21 +25,19 @@ export const AssignedTaskList = ({ childId, childType }) => {
 
   const headingClasses =
     childType === "orange"
-      ? "text-2xl font-bold mb-2 text-orange-500 text-center"
-      : "text-2xl font-bold mb-2 text-pink-500 text-center";
+      ? "text-2xl font-bold mb-4 text-orange-500 text-center"
+      : "text-2xl font-bold mb-4 text-pink-500 text-center";
 
-
+  // Enhanced boxClasses for more depth
   const boxClasses =
-    childType === "orange"
-      ? "h-3/4 bg-white-300/40 rounded-3xl border-2 border-orange-400 p-4 overflow-y-auto min-w-[600px]" // Reduced min-w
-      : "h-3/4 bg-white-400/40 rounded-3xl border-2 border-pink-400 p-4 overflow-y-auto min-w-[600px]"; // Reduced min-w
+    "min-h-3/4 max-h-3/4 bg-gradient-to-br from-white to-gray-100 rounded-3xl border border-gray-300 p-6 overflow-y-auto shadow-lg transition-shadow duration-300 ease-in-out [&::-webkit-scrollbar]:w-0 min-w-[600px]";
 
   return (
     <>
       <h2 className={headingClasses.replace(/text-\w+-500/, "text-black")}>Assigned by Parent</h2> {/* Set heading to black */}
       <div className={boxClasses}>
         {assignedTasks.length !== 0 ? (
-          <div className="flex flex-col gap-2 pb-2">
+          <div className="flex flex-col gap-4 pb-4">
             {assignedTasks.map((task) => (
               <TaskCard
                 key={task.taskId}
