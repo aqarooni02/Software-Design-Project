@@ -21,12 +21,13 @@ export const AnalyticsView = () => {
       JSON.parse(localStorage.getItem(`child_${childId}`))
     ).filter(Boolean);
 
-    // Include both assigned and personal tasks
     const family = children.map((child) => {
-      const allTasks = [...(child.assignedTasks || []), ...(child.personalTasks || [])];
+      const allTasks = [
+        ...(child.assignedTasks || []),
+        ...(child.personalTasks || []),
+        ...(child.archivedTasks || []) // Include archived tasks
+      ];
       const tasksCompleted = allTasks.filter((task) => task.taskStatus).length;
-
-      console.log(`Child: ${child.name}`, allTasks); // Debugging
 
       return {
         name: child.name,

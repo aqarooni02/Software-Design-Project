@@ -1,10 +1,8 @@
 import { TaskCard } from "./TaskCard";
-import { useEffect, useState } from "react";
 
 export const PersonalTaskList = ({ tasks, addTask, deleteTask, onToggleStatus, onEdit, theme }) => {
   const headingClasses = "text-2xl font-bold mb-4 text-black text-center";
 
-  // Updated boxClasses without hover effect
   const boxClasses =
     "min-h-3/4 max-h-3/4 bg-gradient-to-br from-white to-gray-100 rounded-3xl border border-gray-300 p-6 overflow-y-auto shadow-lg transition-shadow duration-300 ease-in-out [&::-webkit-scrollbar]:w-0 min-w-[600px]";
 
@@ -18,7 +16,7 @@ export const PersonalTaskList = ({ tasks, addTask, deleteTask, onToggleStatus, o
               <TaskCard
                 key={task.taskId}
                 task={task}
-                onDelete={deleteTask}
+                onDelete={deleteTask} // Use archiveTask instead of delete
                 onEdit={onEdit}
                 onToggleStatus={onToggleStatus}
                 theme={theme}
