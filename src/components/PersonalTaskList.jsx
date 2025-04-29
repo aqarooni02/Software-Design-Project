@@ -26,6 +26,7 @@ export const PersonalTaskList = ({ tasks, addTask, deleteTask, onToggleStatus, o
             <h2 className="text-xl font-bold mb-2 text-gray-500 text-center">No Tasks Yet!</h2>
           )}
         </div>
+      </div>
         <div className="p-4">
           <button
             className="w-full py-3 px-6 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all"
@@ -34,7 +35,6 @@ export const PersonalTaskList = ({ tasks, addTask, deleteTask, onToggleStatus, o
             + Add New Task
           </button>
         </div>
-      </div>
     </>
   );
 };

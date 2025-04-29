@@ -58,6 +58,8 @@ export const ManageChildList = ({ childId }) => {
     localStorageManager.storeEncodedObject(localStorageKey, storedChild);
 
   };
+  const boxClasses =
+  "min-h-3/4 max-h-3/4 bg-gradient-to-br from-white to-gray-100 rounded-3xl border border-gray-300 p-6 overflow-y-auto shadow-lg transition-shadow duration-300 ease-in-out [&::-webkit-scrollbar]:w-0 min-w-[600px]";
 
   return (
     <>
@@ -69,7 +71,7 @@ export const ManageChildList = ({ childId }) => {
           theme="blue"
         />
       ) : (
-        <div className="min-h-3/4 max-h-3/4 bg-blue-400/40 rounded-3xl border-2 border-blue-400 p-4 overflow-y-auto">
+        <div className={boxClasses}>
           {assignedTasks.length !== 0 ? (
             <div className="flex flex-col gap-2 pb-2">
               {assignedTasks.map((task) => (

@@ -91,7 +91,7 @@ export const ToDoParent = () => {
     const RenderView = () => {
         if (addingTask) {
             return (
-                <div className="flex-1 md:flex-[2] p-4">
+                <div className="flex-[3] p-4">
                     <CreateTaskCard
                         onSave={createTask}
                         onCancel={() => setAddingTask(false)}
@@ -101,11 +101,12 @@ export const ToDoParent = () => {
             );
         } else if (isEditingTask) {
             return (
-                <div className="flex-1 md:flex-[2] p-4">
+                <div className="flex-1 md:flex-[3] p-4">
                     <EditTaskCard
                         onEdit={editTask}
                         onCancel={() => setEditingTask(false)}
                         currentTask={taskToEdit}
+                        theme={"blue"} // Explicitly set theme to blue for the parent
                     />
                 </div>
             );
@@ -113,10 +114,10 @@ export const ToDoParent = () => {
         else if (childSelected !== null) {
             return (
                 <>
-                    <div className="flex-1 p-4 text-blue-700">
+                    <div className="flex-[1.5] p-4 text-blue-700">
                         <ParentChildSelector childSelected={true} setSelectedChild={setChildSelected} />
                     </div>
-                    <div className="flex-1 p-4 text-blue-700">
+                    <div className="flex-[1.5] p-4 text-blue-700">
                         <ManageChildList
                             childId={childSelected}
                         />

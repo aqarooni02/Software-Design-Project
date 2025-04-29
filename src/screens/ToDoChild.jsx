@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { NavBar } from "../components/NavBar";
 import { PersonalTaskList } from "../components/PersonalTaskList";
 import { CreateTaskCard } from "../components/CreateTaskCard";
-import characterPink from '../assets/CharacterPink.png';
-import characterOrange from '../assets/CharacterOrange.png';
+import characterPink from "../assets/CharacterPink.png";
+import characterOrange from "../assets/CharacterOrange.png";
 import { AssignedTaskList } from "../components/AssignedTasksList";
 import { Task } from "../classes/Task";
 import { Character } from "../components/Character";
@@ -18,7 +18,10 @@ export const ToDoChild = () => {
   const { childId } = useParams();
   const childStorageKey = `child_${childId}`;
 
-  const [childData, setChildData] = useState({ personalTasks: [], assignedTasks: [] });
+  const [childData, setChildData] = useState({
+    personalTasks: [],
+    assignedTasks: [],
+  });
   const [childType, setChildType] = useState("pink"); // default theme
   const [addingTask, setAddingTask] = useState(false);
   const [isEditingTask, setEditingTask] = useState(false);
@@ -26,7 +29,8 @@ export const ToDoChild = () => {
 
   useEffect(() => {
     // const storedChild = JSON.parse(localStorage.getItem(childStorageKey));
-    const storedChild = localStorageManager.retrieveEncodedObject(childStorageKey);
+    const storedChild =
+      localStorageManager.retrieveEncodedObject(childStorageKey);
     if (storedChild) {
       setChildData(storedChild);
       setChildType(storedChild.theme || "pink"); // fallback to pink
@@ -47,7 +51,9 @@ export const ToDoChild = () => {
   };
 
   const deleteTask = (taskId) => {
-    const updatedPersonal = childData.personalTasks.filter((task) => task.taskId !== taskId);
+    const updatedPersonal = childData.personalTasks.filter(
+      (task) => task.taskId !== taskId
+    );
     const updatedChild = { ...childData, personalTasks: updatedPersonal };
     setChildData(updatedChild);
     // localStorage.setItem(childStorageKey, JSON.stringify(updatedChild));
@@ -55,7 +61,9 @@ export const ToDoChild = () => {
   };
 
   const startEditingTask = (taskId) => {
-    const editingTask = childData.personalTasks.find((task) => task.taskId === taskId);
+    const editingTask = childData.personalTasks.find(
+      (task) => task.taskId === taskId
+    );
     setTaskToEdit(editingTask);
     setEditingTask(true);
   };
@@ -96,7 +104,7 @@ export const ToDoChild = () => {
     if (addingTask) {
       return (
         <div className="flex flex-1 gap-4">
-          <div className="flex-[2] p-4">
+          <div className="flex-[3] p-4">
             <CreateTaskCard
               onSave={createTask}
               onCancel={() => setAddingTask(false)}
@@ -110,12 +118,18 @@ export const ToDoChild = () => {
       );
     } else if (isEditingTask) {
       return (
-        <div className="flex-1 md:flex-[2] p-4">
-          <EditTaskCard
-            onEdit={editTask}
-            onCancel={() => setEditingTask(false)}
-            currentTask={taskToEdit}
-          />
+        <div className="flex flex-1 gap-4">
+          <div className="flex-1 md:flex-[2] p-4">
+            <EditTaskCard
+              onEdit={editTask}
+              onCancel={() => setEditingTask(false)}
+              currentTask={taskToEdit}
+              theme={childType} // Pass the theme to EditTaskCard
+            />
+          </div>
+          <div className="flex-[1] p-4 flex items-center justify-center">
+            <Character childType={childType} name={childData.name} />
+          </div>
         </div>
       );
     } else {
