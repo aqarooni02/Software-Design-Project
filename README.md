@@ -16,13 +16,51 @@ Homey is a simple web-based task management tool designed to help parents and ch
 
 📂 Household-Planner-System
 
-│-- index.html    # Main HTML file
+→ Homey-Project/
+package.json
+Software-Design-Project/
+• index.html
+• package.json
+• vite.config.js
+• eslint.config.js
+• README.md
+• Development Setup.md
+• .gitignore
+Src/
+• main.jsx
+• App.jsx
+• App.css
+• index.css
+screens/
+• Landing.jsx
+• SignIn.jsx
+• SignUp.jsx
+• ProfileSelection.jsx
+• ProfileSelectionIntro.jsx
+• ToDoParent.jsx
+• ToDoChild.jsx
+• SharedView.jsx
+• AnalyticsView.jsx
+Components/
+• NavBar.jsx
+• TaskCard.jsx
+• PersonalTaskList.jsx
+• AssignedTasksList.jsx
+• ManageChildList.jsx
+• CreateTaskCard.jsx
+• EditTaskCard.jsx
+• ParentChildSelector.jsx
+• ChildBubble.jsx
+• Character.jsx
+• CharacterBubble.jsx
+classes
+• User.js
+• Parent.js
+• Child.js
+• Task.js
+mockData
+• mockdata.js
 
-│-- style.css     # Stylesheet for the website
-
-│-- script.js     # JavaScript file handling logic
-
-│-- README.md     # Project documentation
 
 ## Technologies Used
 - **HTML** – Structuring the web pages
