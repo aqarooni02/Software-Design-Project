@@ -7,6 +7,7 @@ import { EditTaskCard } from "../components/EditTaskCard";
 import { Task } from "../classes/Task";
 import { ParentChildSelector } from "../components/ParentChildSelector";
 import { ManageChildList } from "../components/ManageChildList";
+import { localStorageManager } from "../utils/localStorageManager";
 
 export const ToDoParent = () => {
     const [addingTask, setAddingTask] = useState(false);
@@ -16,7 +17,8 @@ export const ToDoParent = () => {
     const [childSelected, setChildSelected] = useState(null)
 
     useEffect(() => {
-        const parent_data = JSON.parse(localStorage.getItem("parent_data"));
+        // const parent_data = JSON.parse(localStorage.getItem("parent_data"));
+        const parent_data = localStorageManager.retrieveEncodedObject("parent_data");
         if (parent_data?.personalTasks == null) {
             setParentTasks([]);
         } else {
@@ -25,9 +27,11 @@ export const ToDoParent = () => {
     }, []);
 
     const updateLocalStorageTasks = (newTasks) => {
-        const parent_data = JSON.parse(localStorage.getItem("parent_data")) || {};
+        // const parent_data = JSON.parse(localStorage.getItem("parent_data")) || {};
+        const parent_data = localStorageManager.retrieveEncodedObject("parent_data") || {};
         parent_data.personalTasks = newTasks;
-        localStorage.setItem("parent_data", JSON.stringify(parent_data));
+        // localStorage.setItem("parent_data", JSON.stringify(parent_data));
+        localStorageManager.storeEncodedObject("parent_data", parent_data);
     };
 
     const createTask = (task) => {

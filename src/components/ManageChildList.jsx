@@ -1,6 +1,7 @@
 import { TaskCard } from "./TaskCard";
 import { CreateTaskCard } from "./CreateTaskCard";
 import { useEffect, useState } from "react";
+import { localStorageManager } from "../utils/localStorageManager";
 
 export const ManageChildList = ({ childId }) => {
   const localStorageKey = `child_${childId}`;
@@ -10,7 +11,8 @@ export const ManageChildList = ({ childId }) => {
 
   // Load child's data and tasks
   useEffect(() => {
-    const storedChild = JSON.parse(localStorage.getItem(localStorageKey));
+    // const storedChild = JSON.parse(localStorage.getItem(localStorageKey));
+    const storedChild = localStorageManager.retrieveEncodedObject(localStorageKey);
     if (storedChild) {
       setAssignedTasks(storedChild.assignedTasks || []);
       setChildName(storedChild.name || "Unnamed Child");
@@ -25,7 +27,14 @@ export const ManageChildList = ({ childId }) => {
     setAssignedTasks(updatedTasks);
     setAssigningTask(false);
 
-    const storedChild = JSON.parse(localStorage.getItem(localStorageKey)) || {
+    // const storedChild = JSON.parse(localStorage.getItem(localStorageKey)) || {
+    //   id: childId,
+    //   name: childName,
+    //   theme: "pink",
+    //   personalTasks: [],
+    //   assignedTasks: [],
+    // };
+    const storedChild = localStorageManager.retrieveEncodedObject(localStorageKey) || {
       id: childId,
       name: childName,
       theme: "pink",
@@ -34,16 +43,20 @@ export const ManageChildList = ({ childId }) => {
     };
 
     storedChild.assignedTasks = updatedTasks;
-    localStorage.setItem(localStorageKey, JSON.stringify(storedChild));
+    // localStorage.setItem(localStorageKey, JSON.stringify(storedChild));
+    localStorageManager.storeEncodedObject(localStorageKey, storedChild);
   };
 
   const handleDelete = (taskId) => {
     const updatedTasks = assignedTasks.filter(task => task.taskId !== taskId);
     setAssignedTasks(updatedTasks);
 
-    const storedChild = JSON.parse(localStorage.getItem(localStorageKey)) || {};
+    // const storedChild = JSON.parse(localStorage.getItem(localStorageKey)) || {};
+    const storedChild = localStorageManager.retrieveEncodedObject(localStorageKey) || {};
     storedChild.assignedTasks = updatedTasks;
-    localStorage.setItem(localStorageKey, JSON.stringify(storedChild));
+    // localStorage.setItem(localStorageKey, JSON.stringify(storedChild));
+    localStorageManager.storeEncodedObject(localStorageKey, storedChild);
+
   };
 
   return (

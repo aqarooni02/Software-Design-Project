@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { localStorageManager } from "../utils/localStorageManager";
 // import { useNavigate } from "react-router-dom";
 
 export const AddChild = ({ cancelAdd, refreshChildren }) => {
@@ -10,18 +11,23 @@ export const AddChild = ({ cancelAdd, refreshChildren }) => {
     e.preventDefault();
 
    
-    let parentData = JSON.parse(localStorage.getItem("parent_data"));
+    // let parentData = JSON.parse(localStorage.getItem("parent_data"));
+    let parentData = localStorageManager.retrieveEncodedObject("parent_data")
     if (!parentData.childrenIds) {
       parentData = { ...parentData, childrenIds: [0] }
-      localStorage.setItem("parent_data", JSON.stringify(parentData))
+      // localStorage.setItem("parent_data", JSON.stringify(parentData))
+      localStorageManager.storeEncodedObject("parent_data", parentData)
     } else {
       parentData = { ...parentData, childrenIds: [...parentData.childrenIds, parentData.childrenIds.length] }
-      localStorage.setItem("parent_data", JSON.stringify(parentData))
+      // localStorage.setItem("parent_data", JSON.stringify(parentData))
+      localStorageManager.storeEncodedObject("parent_data", parentData)
     }
     const newChildId = parentData.childrenIds.at(-1)
     const initial = { id: newChildId, name: childName, theme: selectedTheme, personalTasks: [], assignedTasks: [] };
-    localStorage.setItem(`child_${newChildId}`, JSON.stringify(initial));
-    console.log(localStorage.getItem(`child_${newChildId}`))
+    // localStorage.setItem(`child_${newChildId}`, JSON.stringify(initial));
+    localStorageManager.storeEncodedObject(`child_${newChildId}`, initial)
+    // console.log(localStorage.getItem(`child_${newChildId}`))
+    console.log(localStorageManager.retrieveEncodedObject(`child_${newChildId}`))
    
     refreshChildren()
     cancelAdd()

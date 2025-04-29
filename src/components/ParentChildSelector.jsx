@@ -1,3 +1,4 @@
+import { localStorageManager } from "../utils/localStorageManager";
 import { ChildBubble } from "./ChildBubble";
 import { useCallback, useEffect, useState } from "react";
 
@@ -5,15 +6,18 @@ export const ParentChildSelector = ({ childSelected, setSelectedChild }) => {
     const [children, setChildren] = useState([]);
 
     const loadChildren = useCallback(() => {
-        const parentData = JSON.parse(localStorage.getItem("parent_data"));
+        // const parentData = JSON.parse(localStorage.getItem("parent_data"));
+        const parentData = localStorageManager.retrieveEncodedObject("parent_data");
 
         if (parentData == null) {
             const defaultData = { childrenIds: [], personalTasks: [] };
-            localStorage.setItem("parent_data", JSON.stringify(defaultData));
+            // localStorage.setItem("parent_data", JSON.stringify(defaultData));
+            localStorageManager.storeEncodedObject("parent_data", defaultData);
             setChildren([]);
         } else {
             const loadedChildren = parentData.childrenIds
-                .map((childId) => JSON.parse(localStorage.getItem(`child_${childId}`)))
+                // .map((childId) => JSON.parse(localStorage.getItem(`child_${childId}`)))
+                .map((childId) => localStorageManager.retrieveEncodedObject(`child_${childId}`))
                 .filter(Boolean);
             setChildren(loadedChildren);
         }

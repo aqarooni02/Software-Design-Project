@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { TaskCard } from "./TaskCard";
+import { localStorageManager } from "../utils/localStorageManager";
 
 export const AssignedTaskList = ({ childId, childType }) => {
   const localStorageKey = `child_${childId}`;
   const [assignedTasks, setAssignedTasks] = useState([]);
 
   useEffect(() => {
-    const storedChild = JSON.parse(localStorage.getItem(localStorageKey));
+    // const storedChild = JSON.parse(localStorage.getItem(localStorageKey));
+    const storedChild = localStorageManager.retrieveEncodedObject(localStorageKey); 
     const newTasks = storedChild && storedChild.assignedTasks ? storedChild.assignedTasks : [];
     setAssignedTasks(newTasks);
   }, [childId, localStorageKey]);
@@ -17,10 +19,12 @@ export const AssignedTaskList = ({ childId, childType }) => {
 
     setAssignedTasks(updatedTasks);
 
-    const storedChild = JSON.parse(localStorage.getItem(localStorageKey)) || {};
+    // const storedChild = JSON.parse(localStorage.getItem(localStorageKey)) || {};
+    const storedChild = localStorageManager.retrieveEncodedObject(localStorageKey) || {};
     storedChild.assignedTasks = updatedTasks;
     storedChild.archivedTasks = [...(storedChild.archivedTasks || []), taskToArchive];
-    localStorage.setItem(localStorageKey, JSON.stringify(storedChild));
+    // localStorage.setItem(localStorageKey, JSON.stringify(storedChild));
+    localStorageManager.storeEncodedObject(localStorageKey, storedChild);
   };
 
   const toggleCompletedStatus = (taskId) => {
@@ -29,9 +33,11 @@ export const AssignedTaskList = ({ childId, childType }) => {
     );
     setAssignedTasks(updatedTasks);
 
-    const storedChild = JSON.parse(localStorage.getItem(localStorageKey)) || {};
+    // const storedChild = JSON.parse(localStorage.getItem(localStorageKey)) || {};
+    const storedChild = localStorageManager.retrieveEncodedObject(localStorageKey) || {};
     storedChild.assignedTasks = updatedTasks;
-    localStorage.setItem(localStorageKey, JSON.stringify(storedChild));
+    // localStorage.setItem(localStorageKey, JSON.stringify(storedChild));
+    localStorageManager.storeEncodedObject(localStorageKey, storedChild);
   };
 
   const headingClasses =

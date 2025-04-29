@@ -6,6 +6,7 @@ import characterAdd from "../assets/CharacterAdd.png";
 import characterOrange from "../assets/CharacterOrange.png";
 import { CloudsAndStars } from "../components/CloudsAndStars";
 import { AddChild } from "../components/AddChild";
+import { localStorageManager } from "../utils/localStorageManager";
 
 export const ProfileSelection = () => {
   const navigate = useNavigate();
@@ -15,21 +16,28 @@ export const ProfileSelection = () => {
 
   const resolveImage = (theme) => {
     switch (theme) {
-      case "pink": return characterPink;
-      case "orange": return characterOrange;
+      case "pink":
+        return characterPink;
+      case "orange":
+        return characterOrange;
     }
-  }
-  
+  };
+
   const loadChildren = useCallback(() => {
-    const parentData = JSON.parse(localStorage.getItem("parent_data"));
+    // const parentData = JSON.parse(localStorage.getItem("parent_data"));
+    const parentData = localStorageManager.retrieveEncodedObject("parent_data");
 
     if (parentData == null) {
       const defaultData = { childrenIds: [], personalTasks: [] };
-      localStorage.setItem("parent_data", JSON.stringify(defaultData));
+      // localStorage.setItem("parent_data", JSON.stringify(defaultData));
+      localStorageManager.storeEncodedObject("parent_data", defaultData);
       setChildren([]);
     } else {
       const loadedChildren = parentData.childrenIds
-        .map((childId) => JSON.parse(localStorage.getItem(`child_${childId}`)))
+        // .map((childId) => JSON.parse(localStorage.getItem(`child_${childId}`)))
+        .map((childId) =>
+          localStorageManager.retrieveEncodedObject(`child_${childId}`)
+        )
         .filter(Boolean);
       setChildren(loadedChildren);
     }
@@ -40,7 +48,7 @@ export const ProfileSelection = () => {
   }, [loadChildren]);
 
   const handleSelect = (userId) => {
-    console.log(userId)
+    console.log(userId);
     setSelectedProfile(userId);
     setTimeout(() => {
       if (userId === "parent") {
@@ -57,19 +65,24 @@ export const ProfileSelection = () => {
       <CloudsAndStars />
 
       {/* Main content */}
-      {!addingChild ?
+      {!addingChild ? (
         <>
           <h1 className="text-5xl font-bold text-white  mb-12 relative animate-fade-in font-sans tracking-wide drop-shadow-md">
             Select Your Profile
           </h1>
           <div className="flex flex-col md:flex-row md:flex-wrap md:justify-center gap-12 overflow-y-auto max-h-dvh p-6 mb-4 [&::-webkit-scrollbar]:w-0">
-
             <div
               onClick={() => handleSelect("parent")}
-              className={`cursor-pointer transform transition duration-300 hover:scale-110 flex flex-col items-center ${selectedProfile === "parent" ? "scale-110" : ""}`}
+              className={`cursor-pointer transform transition duration-300 hover:scale-110 flex flex-col items-center ${
+                selectedProfile === "parent" ? "scale-110" : ""
+              }`}
             >
               <div className="relative group">
-                <div className={`absolute inset-0 bg-blue-300 rounded-full blur-md opacity-0 group-hover:opacity-30 transition-opacity duration-300 ${selectedProfile === "parent" ? "opacity-50" : ""}`}></div>
+                <div
+                  className={`absolute inset-0 bg-blue-300 rounded-full blur-md opacity-0 group-hover:opacity-30 transition-opacity duration-300 ${
+                    selectedProfile === "parent" ? "opacity-50" : ""
+                  }`}
+                ></div>
                 <img
                   src={characterBlue}
                   alt="Character Blue"
@@ -81,16 +94,22 @@ export const ProfileSelection = () => {
                 Parent
               </p>
             </div>
-            
+
             {children.map((child, i) => {
               return (
                 <div
                   key={i}
                   onClick={() => handleSelect(child.id)}
-                  className={`cursor-pointer transform transition duration-300 hover:scale-110 flex flex-col items-center ${selectedProfile === child.id ? "scale-110" : ""}`}
+                  className={`cursor-pointer transform transition duration-300 hover:scale-110 flex flex-col items-center ${
+                    selectedProfile === child.id ? "scale-110" : ""
+                  }`}
                 >
                   <div className="relative group">
-                    <div className={`absolute inset-0 bg-pink-300 rounded-full blur-md opacity-0 group-hover:opacity-30 transition-opacity duration-300 ${selectedProfile === child.id ? "opacity-50" : ""}`}></div>
+                    <div
+                      className={`absolute inset-0 bg-pink-300 rounded-full blur-md opacity-0 group-hover:opacity-30 transition-opacity duration-300 ${
+                        selectedProfile === child.id ? "opacity-50" : ""
+                      }`}
+                    ></div>
                     <img
                       src={resolveImage(child.theme)}
                       alt="Character"
@@ -104,7 +123,7 @@ export const ProfileSelection = () => {
                 </div>
               );
             })}
-            
+
             <div
               onClick={() => setAddingChild(true)}
               className="cursor-pointer transform transition duration-300 hover:scale-110 flex flex-col items-center"
@@ -124,10 +143,12 @@ export const ProfileSelection = () => {
             </div>
           </div>
         </>
-        :
-        <AddChild cancelAdd={() => setAddingChild(false)} refreshChildren={loadChildren} />
-      }
-
+      ) : (
+        <AddChild
+          cancelAdd={() => setAddingChild(false)}
+          refreshChildren={loadChildren}
+        />
+      )}
     </div>
   );
 };

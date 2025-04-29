@@ -70,10 +70,10 @@ export const Landing = () => {
               <div className="text-center"> 
                 <h1 className="text-6xl sm:text-8xl font-bold text-blue-900">
                   Welcome to
+                </h1>
                   <h2 className="text-6xl sm:text-8xl font-bold text-blue-900 "> 
                     HOMEY
                   </h2>
-                </h1>
               </div>
 
               <p className="text-xl sm:text-2xl text-blue-900 leading-relaxed text-center max-w-3xl mx-auto">

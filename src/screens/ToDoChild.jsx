@@ -11,6 +11,7 @@ import { Task } from "../classes/Task";
 import { Character } from "../components/Character";
 import { EditTaskCard } from "../components/EditTaskCard";
 import { useParams } from "react-router-dom";
+import { localStorageManager } from "../utils/localStorageManager";
 
 // Now we expect childId to be passed as a prop so we can use the same key as in ManageChildList
 export const ToDoChild = () => {
@@ -24,7 +25,8 @@ export const ToDoChild = () => {
   const [taskToEdit, setTaskToEdit] = useState(null);
 
   useEffect(() => {
-    const storedChild = JSON.parse(localStorage.getItem(childStorageKey));
+    // const storedChild = JSON.parse(localStorage.getItem(childStorageKey));
+    const storedChild = localStorageManager.retrieveEncodedObject(childStorageKey);
     if (storedChild) {
       setChildData(storedChild);
       setChildType(storedChild.theme || "pink"); // fallback to pink
@@ -40,14 +42,16 @@ export const ToDoChild = () => {
     const updatedPersonal = [...childData.personalTasks, task];
     const updatedChild = { ...childData, personalTasks: updatedPersonal };
     setChildData(updatedChild);
-    localStorage.setItem(childStorageKey, JSON.stringify(updatedChild));
+    // localStorage.setItem(childStorageKey, JSON.stringify(updatedChild));
+    localStorageManager.storeEncodedObject(childStorageKey, updatedChild);
   };
 
   const deleteTask = (taskId) => {
     const updatedPersonal = childData.personalTasks.filter((task) => task.taskId !== taskId);
     const updatedChild = { ...childData, personalTasks: updatedPersonal };
     setChildData(updatedChild);
-    localStorage.setItem(childStorageKey, JSON.stringify(updatedChild));
+    // localStorage.setItem(childStorageKey, JSON.stringify(updatedChild));
+    localStorageManager.storeEncodedObject(childStorageKey, updatedChild);
   };
 
   const startEditingTask = (taskId) => {
@@ -73,7 +77,8 @@ export const ToDoChild = () => {
     });
     const updatedChild = { ...childData, personalTasks: updatedPersonal };
     setChildData(updatedChild);
-    localStorage.setItem(childStorageKey, JSON.stringify(updatedChild));
+    // localStorage.setItem(childStorageKey, JSON.stringify(updatedChild));
+    localStorageManager.storeEncodedObject(childStorageKey, updatedChild);
     setTaskToEdit(null);
   };
 
@@ -83,7 +88,8 @@ export const ToDoChild = () => {
     );
     const updatedChild = { ...childData, personalTasks: updatedPersonal };
     setChildData(updatedChild);
-    localStorage.setItem(childStorageKey, JSON.stringify(updatedChild));
+    // localStorage.setItem(childStorageKey, JSON.stringify(updatedChild));
+    localStorageManager.storeEncodedObject(childStorageKey, updatedChild);
   };
 
   const RenderView = () => {
