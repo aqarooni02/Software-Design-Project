@@ -8,6 +8,7 @@ import characterBlue from "../assets/CharacterBlue.png";
 import characterPink from "../assets/CharacterPink.png";
 import characterOrange from "../assets/CharacterOrange.png";
 import { ChildBubble } from "../components/ChildBubble";
+import { localStorageManager } from "../utils/localStorageManager";
 
 ChartJS.register(ArcElement, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
@@ -16,10 +17,14 @@ export const AnalyticsView = () => {
 
   // Load data from localStorage
   useEffect(() => {
-    const parentData = JSON.parse(localStorage.getItem("parent_data")) || { childrenIds: [] };
-    const children = parentData.childrenIds.map((childId) =>
-      JSON.parse(localStorage.getItem(`child_${childId}`))
-    ).filter(Boolean);
+    // const parentData = JSON.parse(localStorage.getItem("parent_data")) || { childrenIds: [] };
+    const parentData = localStorageManager.retrieveEncodedObject("parent_data") || { childrenIds: [] };
+    const children = parentData.childrenIds
+    // .map((childId) =>
+    //   JSON.parse(localStorage.getItem(`child_${childId}`)))
+    .map((childId) =>
+      localStorageManager.retrieveEncodedObject(`child_${childId}`))
+    .filter(Boolean);
 
     const family = children.map((child) => {
       const allTasks = [
