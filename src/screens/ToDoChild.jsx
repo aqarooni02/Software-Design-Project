@@ -119,7 +119,7 @@ export const ToDoChild = () => {
     } else if (isEditingTask) {
       return (
         <div className="flex flex-1 gap-4">
-          <div className="flex-1 md:flex-[2] p-4">
+          <div className="flex-1 md:flex-[3] p-4">
             <EditTaskCard
               onEdit={editTask}
               onCancel={() => setEditingTask(false)}

@@ -114,10 +114,10 @@ export const ToDoParent = () => {
         else if (childSelected !== null) {
             return (
                 <>
-                    <div className="flex-[1.5] p-4 text-blue-700">
+                    <div className="flex-[1] p-4 text-blue-700">
                         <ParentChildSelector childSelected={true} setSelectedChild={setChildSelected} />
                     </div>
-                    <div className="flex-[1.5] p-4 text-blue-700">
+                    <div className="flex-[2] p-4 text-blue-700">
                         <ManageChildList
                             childId={childSelected}
                         />
@@ -127,10 +127,10 @@ export const ToDoParent = () => {
         } else {
             return (
                 <>
-                    <div className="flex-[2] p-4 text-blue-700"> {/* Changed flex-1 to flex-[2] */}
+                    <div className="flex-[1] p-4 text-blue-700"> {/* Changed flex-1 to flex-[2] */}
                         <ParentChildSelector setSelectedChild={setChildSelected} />
                     </div>
-                    <div className="flex-[3] p-4 text-blue-700"> {/* Changed flex-1 to flex-[3] */}
+                    <div className="flex-[2] p-4 text-blue-700"> {/* Changed flex-1 to flex-[3] */}
                         <PersonalTaskList
                             tasks={parentTasks}
                             addTask={() => setAddingTask(true)}
