@@ -4,7 +4,7 @@ import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from "chart.js";
 import { TrophyIcon as OutlineTrophyIcon, StarIcon as OutlineStarIcon, CheckCircleIcon } from "@heroicons/react/24/outline";
 import { NavBar } from "../components/NavBar";
-import characterBlue from "../assets/CharacterBlue.png";
+// import characterBlue from "../assets/CharacterBlue.png";
 import characterPink from "../assets/CharacterPink.png";
 import characterOrange from "../assets/CharacterOrange.png";
 import { ChildBubble } from "../components/ChildBubble";
