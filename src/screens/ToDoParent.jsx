@@ -9,6 +9,11 @@ import { ParentChildSelector } from "../components/ParentChildSelector";
 import { ManageChildList } from "../components/ManageChildList";
 import { localStorageManager } from "../utils/localStorageManager";
 
+/**
+ * ToDoParent component representing the parent's task management view.
+ * @component
+ * @returns {JSX.Element} The rendered ToDoParent component
+ */
 export const ToDoParent = () => {
     const [addingTask, setAddingTask] = useState(false);
     const [isEditingTask, setEditingTask] = useState(false);
@@ -16,6 +21,9 @@ export const ToDoParent = () => {
     const [parentTasks, setParentTasks] = useState([]);
     const [childSelected, setChildSelected] = useState(null)
 
+    /**
+     * Loads parent tasks from localStorage on component mount.
+     */
     useEffect(() => {
         // const parent_data = JSON.parse(localStorage.getItem("parent_data"));
         const parent_data = localStorageManager.retrieveEncodedObject("parent_data");
@@ -26,6 +34,10 @@ export const ToDoParent = () => {
         }
     }, []);
 
+    /**
+     * Updates the tasks in localStorage.
+     * @param {Array<Task>} newTasks - The updated array of tasks
+     */
     const updateLocalStorageTasks = (newTasks) => {
         // const parent_data = JSON.parse(localStorage.getItem("parent_data")) || {};
         const parent_data = localStorageManager.retrieveEncodedObject("parent_data") || {};
@@ -34,6 +46,10 @@ export const ToDoParent = () => {
         localStorageManager.storeEncodedObject("parent_data", parent_data);
     };
 
+    /**
+     * Creates a new task and updates the state and localStorage.
+     * @param {Task} task - The task to create
+     */
     const createTask = (task) => {
         const updatedTasks = [...parentTasks, task];
         setAddingTask(false);
@@ -41,20 +57,34 @@ export const ToDoParent = () => {
         updateLocalStorageTasks(updatedTasks);
     };
 
+    /**
+     * Deletes a task and updates the state and localStorage.
+     * @param {string} taskId - The ID of the task to delete
+     */
     const deleteTask = (taskId) => {
         const updatedTasks = parentTasks.filter((task) => task.taskId !== taskId);
         setParentTasks(updatedTasks);
         updateLocalStorageTasks(updatedTasks);
     };
 
+    /**
+     * Starts the task editing process.
+     * @param {string} taskId - The ID of the task to edit
+     */
     const startEditingTask = (taskId) => {
         const editingTask = parentTasks.find((task) => task.taskId === taskId);
         setTaskToEdit(editingTask);
         setEditingTask(true);
     };
 
-
-
+    /**
+     * Edits an existing task and updates the state and localStorage.
+     * @param {Object} newTask - The updated task data
+     * @param {string} newTask.newTaskTitle - The new title of the task
+     * @param {string} newTask.newTaskDescription - The new description of the task
+     * @param {string} newTask.newTaskDate - The new due date of the task
+     * @param {string} newTask.newTaskPriority - The new priority of the task
+     */
     const editTask = (newTask) => {
         setEditingTask(false);
         const editTask = parentTasks.map((task) => {
@@ -75,6 +105,10 @@ export const ToDoParent = () => {
         setTaskToEdit(null);
     };
 
+    /**
+     * Toggles the completion status of a task.
+     * @param {string} taskId - The ID of the task to toggle
+     */
     const toggleCompletedStatus = (taskId) => {
         const togglingTask = parentTasks.find((task) => task.taskId === taskId);
         const toggleStatus = parentTasks.map((task) => {
@@ -88,6 +122,10 @@ export const ToDoParent = () => {
         console.log(togglingTask.taskStatus)
     }
 
+    /**
+     * Renders the appropriate view based on the current state.
+     * @returns {JSX.Element} The rendered view component
+     */
     const RenderView = () => {
         if (addingTask) {
             return (
