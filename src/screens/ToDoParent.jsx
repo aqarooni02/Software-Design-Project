@@ -205,17 +205,6 @@ export const ToDoParent = () => {
         <div className="h-screen flex flex-col bg-white">
             <NavBar parent={true} />
             <div className="flex flex-1 flex-wrap gap-4 p-4">
-                <div className="absolute top-4 right-4">
-                    <button 
-                        onClick={() => {
-                            setIsAuthenticated(false);
-                            localStorageManager.removeEncodedObject("parent_auth");
-                        }}
-                        className="text-gray-500 hover:text-gray-700 text-2xl"
-                    >
-                        ×
-                    </button>
-                </div>
                 <RenderView />
                 <div className="flex-1 p-4">
                     <Character name="Parent" size="small" />

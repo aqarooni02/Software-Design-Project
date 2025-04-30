@@ -32,9 +32,9 @@ export const NavBar = ({ parent, childType, childId }) => {
 
   return (
     <nav className="bg-white border-b border-gray-200 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+      <div className="w-full px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
         {/* Left Side: Logo and Title */}
-        <div className="flex items-center gap-2">
+        <div className="flex-shrink-0">
           <Link to="/profile-selection" className="flex items-center gap-2">
             <img src={logo} alt="Homey Logo" className="h-8 w-8" />
             <span className="text-xl font-bold text-gray-800">Homey</span>
@@ -42,7 +42,7 @@ export const NavBar = ({ parent, childType, childId }) => {
         </div>
 
         {/* Right Side: Navigation Links */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center space-x-8">
           <Link
             to={getMyToDoLink()}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg ${
