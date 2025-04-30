@@ -2,9 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Calendar, ChevronLeft, ChevronRight, Plus } from 'lucide-react';
 import AddEventModel from '../components/AddEventModel';
 import { NavBar } from '../components/NavBar';
+import { useLocation } from 'react-router-dom';
 
-const SharedView = ({ userType, childId }) => {
-  const isParent = userType === 'parent'; // check if this user is a parent or not
+const SharedView = () => {
+  const location = useLocation();
+  const isParent = location.state?.isParent || false; // Get user type from location state
+  const childId = location.state?.childId || null; // Get childId from location state
   const [currentMonth, setCurrentMonth] = useState(new Date());  // what month we show
   const [isAddEventOpen, setIsAddEventOpen] = useState(false); // control add event dialog
   const [events, setEvents] = useState([]); // where all evnts are stashed
@@ -103,7 +106,7 @@ const SharedView = ({ userType, childId }) => {
 
   return (
     <div className="min-h-screen bg-white">
-      <NavBar parent={isParent} childType={isParent ? null : 'child'} childId={childId} />
+      <NavBar parent={isParent} childType={!isParent ? 'child' : null} childId={childId} />
       <div className="max-w-6xl mx-auto px-4 py-8">
         {/* Header with calendar title and add button */}
         <div className="flex justify-between items-center mb-6">

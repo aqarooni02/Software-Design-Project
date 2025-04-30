@@ -8,11 +8,27 @@ import { CloudsAndStars } from "../components/CloudsAndStars";
 import { AddChild } from "../components/AddChild";
 import { localStorageManager } from "../utils/localStorageManager";
 
+const mathQuestions = [
+  { question: "What is 2 + 2?", answer: "4" },
+  { question: "What is 3 + 3?", answer: "6" },
+  { question: "What is 4 + 4?", answer: "8" },
+  { question: "What is 5 + 5?", answer: "10" },
+  { question: "What is 6 + 6?", answer: "12" },
+  { question: "What is 7 + 7?", answer: "14" },
+  { question: "What is 8 + 8?", answer: "16" },
+  { question: "What is 9 + 9?", answer: "18" },
+  { question: "What is 10 + 10?", answer: "20" }
+];
+
 export const ProfileSelection = () => {
   const navigate = useNavigate();
   const [addingChild, setAddingChild] = useState(false);
   const [children, setChildren] = useState([]);
   const [selectedProfile, setSelectedProfile] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
+  const [password, setPassword] = useState('');
+  const [currentQuestion, setCurrentQuestion] = useState(null);
 
   const resolveImage = (theme) => {
     switch (theme) {
@@ -50,13 +66,28 @@ export const ProfileSelection = () => {
   const handleSelect = (userId) => {
     console.log(userId);
     setSelectedProfile(userId);
-    setTimeout(() => {
-      if (userId === "parent") {
-        navigate("/tasks", { replace: true }); // Parent's To Do view
-      } else {
-        navigate(`/child-tasks/${userId}`, { replace: true }); // Child pink To Do view
-      }
-    }, 300); // Small delay for animation effect
+    if (userId === "parent") {
+      // Select a random question
+      const randomIndex = Math.floor(Math.random() * mathQuestions.length);
+      setCurrentQuestion(mathQuestions[randomIndex]);
+      setShowPassword(true);
+    } else {
+      setTimeout(() => {
+        navigate(`/child-tasks/${userId}`, { replace: true });
+      }, 300);
+    }
+  };
+
+  const checkPassword = () => {
+    if (password === currentQuestion.answer) {
+      setShowPassword(false);
+      setError('');
+      setTimeout(() => {
+        navigate("/tasks", { replace: true });
+      }, 300);
+    } else {
+      setError('Wrong answer! Try again.');
+    }
   };
 
   return (
@@ -148,6 +179,35 @@ export const ProfileSelection = () => {
           cancelAdd={() => setAddingChild(false)}
           refreshChildren={loadChildren}
         />
+      )}
+
+      {showPassword && (
+        <div className="fixed inset-0 bg-gradient-to-b from-[#1a4b8c] via-[#90cdf4] to-white flex items-center justify-center z-50">
+          <div className="bg-white p-8 rounded-lg shadow-md relative w-96">
+            <button 
+              onClick={() => setShowPassword(false)}
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-2xl"
+            >
+              ×
+            </button>
+            <h2 className="text-2xl text-black font-bold mb-6 text-center">Parent Access</h2>
+            <p className="mb-4 text-center text-black">{currentQuestion.question}</p>
+            {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
+            <input
+              type="text"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-black"
+              placeholder="Enter the answer"
+            />
+            <button
+              onClick={checkPassword}
+              className="mt-4 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );
