@@ -7,12 +7,14 @@ import characterOrange from "../assets/CharacterOrange.png";
 import { CloudsAndStars } from "../components/CloudsAndStars";
 import { AddChild } from "../components/AddChild";
 import { localStorageManager } from "../utils/localStorageManager";
+import { useAuth } from "../hooks/useAuth";
 
 export const ProfileSelection = () => {
   const navigate = useNavigate();
   const [addingChild, setAddingChild] = useState(false);
   const [children, setChildren] = useState([]);
   const [selectedProfile, setSelectedProfile] = useState(null);
+  const { login } = useAuth();
 
   const resolveImage = (theme) => {
     switch (theme) {
@@ -51,8 +53,10 @@ export const ProfileSelection = () => {
     console.log(userId);
     setSelectedProfile(userId);
     setTimeout(() => {
+      login(userId)
       if (userId === "parent") {
         navigate("/tasks", { replace: true }); // Parent's To Do view
+
       } else {
         navigate(`/child-tasks/${userId}`, { replace: true }); // Child pink To Do view
       }
@@ -73,15 +77,13 @@ export const ProfileSelection = () => {
           <div className="flex flex-col md:flex-row md:flex-wrap md:justify-center gap-12 overflow-y-auto max-h-dvh p-6 mb-4 [&::-webkit-scrollbar]:w-0">
             <div
               onClick={() => handleSelect("parent")}
-              className={`cursor-pointer transform transition duration-300 hover:scale-110 flex flex-col items-center ${
-                selectedProfile === "parent" ? "scale-110" : ""
-              }`}
+              className={`cursor-pointer transform transition duration-300 hover:scale-110 flex flex-col items-center ${selectedProfile === "parent" ? "scale-110" : ""
+                }`}
             >
               <div className="relative group">
                 <div
-                  className={`absolute inset-0 bg-blue-300 rounded-full blur-md opacity-0 group-hover:opacity-30 transition-opacity duration-300 ${
-                    selectedProfile === "parent" ? "opacity-50" : ""
-                  }`}
+                  className={`absolute inset-0 bg-blue-300 rounded-full blur-md opacity-0 group-hover:opacity-30 transition-opacity duration-300 ${selectedProfile === "parent" ? "opacity-50" : ""
+                    }`}
                 ></div>
                 <img
                   src={characterBlue}
@@ -100,15 +102,13 @@ export const ProfileSelection = () => {
                 <div
                   key={i}
                   onClick={() => handleSelect(child.id)}
-                  className={`cursor-pointer transform transition duration-300 hover:scale-110 flex flex-col items-center ${
-                    selectedProfile === child.id ? "scale-110" : ""
-                  }`}
+                  className={`cursor-pointer transform transition duration-300 hover:scale-110 flex flex-col items-center ${selectedProfile === child.id ? "scale-110" : ""
+                    }`}
                 >
                   <div className="relative group">
                     <div
-                      className={`absolute inset-0 bg-pink-300 rounded-full blur-md opacity-0 group-hover:opacity-30 transition-opacity duration-300 ${
-                        selectedProfile === child.id ? "opacity-50" : ""
-                      }`}
+                      className={`absolute inset-0 bg-pink-300 rounded-full blur-md opacity-0 group-hover:opacity-30 transition-opacity duration-300 ${selectedProfile === child.id ? "opacity-50" : ""
+                        }`}
                     ></div>
                     <img
                       src={resolveImage(child.theme)}
