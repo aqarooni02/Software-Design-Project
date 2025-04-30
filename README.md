@@ -1,8 +1,6 @@
 
 # HOMEY 🏡 
-# Household Planner System
-
-# Homey – Household Planning App
+ Household Planner System
 
 **Homey** is a role-based task and event management platform designed for parents and children to collaborate on household responsibilities. Built with React, Tailwind CSS, and localStorage, it supports personal and assigned task lists, child-specific theming, shared family events, and interactive progress tracking.
 
