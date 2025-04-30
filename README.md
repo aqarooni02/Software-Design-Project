@@ -115,9 +115,9 @@
 └─ vite.config.js
 ```
 ## 🧑‍💻 Local Setup Instructions
-## How to setup dev environment
+### How to setup dev environment
 
-## repo setup
+#### repo setup
 
 - ensure node is installed
   - check by doing ``` node -v ```
@@ -130,14 +130,14 @@
 - Run live dev server
   - ``` npm run dev ```
 
-## Create your own dev branch
+### Create your own dev branch
 
 - while in main checkout a new branch with your name
   - ``` git checkout -b "YourName" ```
 
 ### This is for ensuring your changes are in your isolated branch
 
-## Update your dev branch with main
+### Update your dev branch with main
 
 ### To update your branch with the latest changes of main
 
@@ -150,7 +150,7 @@
 - Merge latest main with your branch
   - ``` git merge main ```
 
-## After developing your feature
+### After developing your feature
 
 ### While on your branch follow these steps
 
@@ -163,7 +163,7 @@
   - You may get a prompt to set upstream origin. In that case copy the command it gives and run it
   - What this does is link your local branch to the cloud/remote branch in github
 
-## Integrating your changes to main
+### Integrating your changes to main
 
 ### The reason for seperate dev branches is to allow resolving merge conflicts to be done in the dev branch instead of main
 
@@ -178,7 +178,7 @@
 - Push the merged commits
   - ``` git push ```
 
-## Useful git commands
+### Useful git commands
 
 - Log the commits in current branch
   - ``` git log ```
