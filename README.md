@@ -187,8 +187,15 @@
 - Continue a merge after resolving conflicts
   - ``` git merge --continue ```
   
-## Contributors
+## 🙋‍♂️ Contributors
 - **Athbi Salmeen** – Product Owner  
 - **Ghareesa Albuflasa** – Scrum Master
 - **Zain Mayoof** & **Ahmed Qarooni** – Development Team   
-```
+
+
+## Important Documentation
+- Figma: https://www.figma.com/design/TMkQJyZb4LhQPV2duU6pxn/homey?node-id=9-1941&t=18oO8FnCuImVFPld-0
+- Jira:
+- Meeting Minutes: 
+- Architecture Diagrams:
+- User Manual: 
