@@ -8,6 +8,7 @@ import { Task } from "../classes/Task";
 import { ParentChildSelector } from "../components/ParentChildSelector";
 import { ManageChildList } from "../components/ManageChildList";
 import { localStorageManager } from "../utils/localStorageManager";
+import { useNavigate } from "react-router-dom";
 
 /**
  * ToDoParent component representing the parent's task management view.
@@ -15,17 +16,27 @@ import { localStorageManager } from "../utils/localStorageManager";
  * @returns {JSX.Element} The rendered ToDoParent component
  */
 export const ToDoParent = () => {
+    const navigate = useNavigate();
+    const [password, setPassword] = useState('');
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [error, setError] = useState('');
     const [addingTask, setAddingTask] = useState(false);
     const [isEditingTask, setEditingTask] = useState(false);
     const [taskToEdit, setTaskToEdit] = useState(null);
     const [parentTasks, setParentTasks] = useState([]);
-    const [childSelected, setChildSelected] = useState(null)
+    const [childSelected, setChildSelected] = useState(null);
 
-    /**
-     * Loads parent tasks from localStorage on component mount.
-     */
+    // Simple password check: 2 + 2 = 4
+    const checkPassword = () => {
+        if (password === '4') {
+            setIsAuthenticated(true);
+            setError('');
+        } else {
+            setError('Wrong answer! Try again.');
+        }
+    };
+
     useEffect(() => {
-        // const parent_data = JSON.parse(localStorage.getItem("parent_data"));
         const parent_data = localStorageManager.retrieveEncodedObject("parent_data");
         if (parent_data?.personalTasks == null) {
             setParentTasks([]);
@@ -34,22 +45,12 @@ export const ToDoParent = () => {
         }
     }, []);
 
-    /**
-     * Updates the tasks in localStorage.
-     * @param {Array<Task>} newTasks - The updated array of tasks
-     */
     const updateLocalStorageTasks = (newTasks) => {
-        // const parent_data = JSON.parse(localStorage.getItem("parent_data")) || {};
         const parent_data = localStorageManager.retrieveEncodedObject("parent_data") || {};
         parent_data.personalTasks = newTasks;
-        // localStorage.setItem("parent_data", JSON.stringify(parent_data));
         localStorageManager.storeEncodedObject("parent_data", parent_data);
     };
 
-    /**
-     * Creates a new task and updates the state and localStorage.
-     * @param {Task} task - The task to create
-     */
     const createTask = (task) => {
         const updatedTasks = [...parentTasks, task];
         setAddingTask(false);
@@ -57,34 +58,18 @@ export const ToDoParent = () => {
         updateLocalStorageTasks(updatedTasks);
     };
 
-    /**
-     * Deletes a task and updates the state and localStorage.
-     * @param {string} taskId - The ID of the task to delete
-     */
     const deleteTask = (taskId) => {
         const updatedTasks = parentTasks.filter((task) => task.taskId !== taskId);
         setParentTasks(updatedTasks);
         updateLocalStorageTasks(updatedTasks);
     };
 
-    /**
-     * Starts the task editing process.
-     * @param {string} taskId - The ID of the task to edit
-     */
     const startEditingTask = (taskId) => {
         const editingTask = parentTasks.find((task) => task.taskId === taskId);
         setTaskToEdit(editingTask);
         setEditingTask(true);
     };
 
-    /**
-     * Edits an existing task and updates the state and localStorage.
-     * @param {Object} newTask - The updated task data
-     * @param {string} newTask.newTaskTitle - The new title of the task
-     * @param {string} newTask.newTaskDescription - The new description of the task
-     * @param {string} newTask.newTaskDate - The new due date of the task
-     * @param {string} newTask.newTaskPriority - The new priority of the task
-     */
     const editTask = (newTask) => {
         setEditingTask(false);
         const editTask = parentTasks.map((task) => {
@@ -105,10 +90,6 @@ export const ToDoParent = () => {
         setTaskToEdit(null);
     };
 
-    /**
-     * Toggles the completion status of a task.
-     * @param {string} taskId - The ID of the task to toggle
-     */
     const toggleCompletedStatus = (taskId) => {
         const togglingTask = parentTasks.find((task) => task.taskId === taskId);
         const toggleStatus = parentTasks.map((task) => {
@@ -122,10 +103,6 @@ export const ToDoParent = () => {
         console.log(togglingTask.taskStatus)
     }
 
-    /**
-     * Renders the appropriate view based on the current state.
-     * @returns {JSX.Element} The rendered view component
-     */
     const RenderView = () => {
         if (addingTask) {
             return (
@@ -133,7 +110,7 @@ export const ToDoParent = () => {
                     <CreateTaskCard
                         onSave={createTask}
                         onCancel={() => setAddingTask(false)}
-                        theme="blue" // Explicitly set theme to blue for the parent
+                        theme="blue"
                     />
                 </div>
             );
@@ -144,7 +121,7 @@ export const ToDoParent = () => {
                         onEdit={editTask}
                         onCancel={() => setEditingTask(false)}
                         currentTask={taskToEdit}
-                        theme={"blue"} // Explicitly set theme to blue for the parent
+                        theme={"blue"}
                     />
                 </div>
             );
@@ -165,10 +142,10 @@ export const ToDoParent = () => {
         } else {
             return (
                 <>
-                    <div className="flex-[1] p-4 text-blue-700"> {/* Changed flex-1 to flex-[2] */}
+                    <div className="flex-[1] p-4 text-blue-700">
                         <ParentChildSelector setSelectedChild={setChildSelected} />
                     </div>
-                    <div className="flex-[2] p-4 text-blue-700"> {/* Changed flex-1 to flex-[3] */}
+                    <div className="flex-[2] p-4 text-blue-700">
                         <PersonalTaskList
                             tasks={parentTasks}
                             addTask={() => setAddingTask(true)}
@@ -183,13 +160,52 @@ export const ToDoParent = () => {
         }
     };
 
+    if (!isAuthenticated) {
+        return (
+            <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+                <div className="p-8 bg-white rounded-lg shadow-md relative">
+                    <button 
+                        onClick={() => navigate('/profile-selection')}
+                        className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-2xl"
+                    >
+                        ×
+                    </button>
+                    <h2 className="text-2xl text-black font-bold mb-6 text-center">Parent Access</h2>
+                    <p className="mb-4 text-center text-black">What is 2 + 2?</p>
+                    {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
+                    <input
+                        type="text"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-black"
+                        placeholder="Enter the answer"
+                    />
+                    <button
+                        onClick={checkPassword}
+                        className="mt-4 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    >
+                        Submit
+                    </button>
+                </div>
+            </div>
+        );
+    }
+
     return (
-        <div className="h-screen flex flex-col bg-white"> {/* Changed bg-blue to bg-white */}
+        <div className="h-screen flex flex-col bg-white">
             <NavBar parent={true} />
             <div className="flex flex-1 flex-wrap gap-4 p-4">
+                <div className="absolute top-4 right-4">
+                    <button 
+                        onClick={() => setIsAuthenticated(false)}
+                        className="text-gray-500 hover:text-gray-700 text-2xl"
+                    >
+                        ×
+                    </button>
+                </div>
                 <RenderView />
                 <div className="flex-1 p-4">
-                    <Character name="Parent" size="small" /> {/* Pass a size prop */}
+                    <Character name="Parent" size="small" />
                 </div>
             </div>
         </div>
