@@ -9,7 +9,7 @@ import { ProfileSelection } from './screens/ProfileSelection';
 import { ToDoParent } from './screens/ToDoParent';
 import { ToDoChild } from './screens/ToDoChild';
 import { AnalyticsView } from './screens/AnalyticsView';
-import { SharedView } from './screens/SharedView';
+import SharedView from './screens/SharedView';
 
 function App() {
   return (
