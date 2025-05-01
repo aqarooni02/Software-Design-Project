@@ -203,7 +203,7 @@ export const ToDoParent = () => {
 
     return (
         <div className="h-screen flex flex-col bg-white">
-            <NavBar parent={true} />
+            <NavBar  />
             <div className="flex flex-1 flex-wrap gap-4 p-4">
                 <RenderView />
                 <div className="flex-1 p-4">

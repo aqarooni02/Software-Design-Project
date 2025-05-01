@@ -167,7 +167,7 @@ export const AnalyticsView = () => {
 
   return (
     <div className="min-h-screen bg-white"> {/* Changed background to white */}
-      <NavBar parent={true} />
+      <NavBar />
       <div className="p-4">
         <div className="text-left mb-4">
           <h1 className="text-3xl font-bold text-black">Family Insights Dashboard</h1>

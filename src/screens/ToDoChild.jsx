@@ -163,7 +163,7 @@ export const ToDoChild = () => {
 
   return (
     <div className={`h-screen flex flex-col ${backgroundClass}`}>
-      <NavBar parent={false} childType={childType} childId={childId} />
+      <NavBar  />
       <div className="flex flex-1 flex-col gap-4 p-4">
         <RenderView />
       </div>

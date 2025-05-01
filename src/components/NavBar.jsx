@@ -13,25 +13,7 @@ export const NavBar = () => {
   // Helper function to check if a link is active
   const isActive = (path) => location.pathname === path;
 
-  // Determine the correct "My To Do" link based on user type
-  const getMyToDoLink = () => {
-    if (parent) {
-      return "/tasks";
-    } else if (childId) {
-      return `/child-tasks/${childId}`;
-    }
-    return "/profile-selection";
-  };
-
-  // Handle navigation to shared view with user context
-  const handleSharedViewClick = () => {
-    navigate('/shared-view', { 
-      state: { 
-        isParent: parent,
-        childId: childId
-      }
-    });
-  };
+ 
 
   return (
     <nav className="bg-white border-b border-gray-200 shadow-sm">
