@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { FlagIcon as OutlineFlagIcon } from "@heroicons/react/24/outline";
-import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid"; // Import icons for edit and delete
+import { PencilIcon, StarIcon, TrashIcon } from "@heroicons/react/24/solid"; // Import icons for edit and delete
 
-export const TaskCard = ({ task, onEdit, onDelete, onToggleStatus, theme, noToggle = false }) => {
+export const TaskCard = ({ task, onEdit, onDelete, onToggleStatus, noToggle = false, giveStar = false }) => {
+
+  const [starred, setStarred] = useState(task.starred)
   // Priority-based styles
   const priorityColors = {
     High: "border-red-500",
@@ -11,6 +13,7 @@ export const TaskCard = ({ task, onEdit, onDelete, onToggleStatus, theme, noTogg
   };
 
   const priorityColor = priorityColors[task.taskPriority] || "border-gray-300";
+
 
   // Completed task styling
   const textClass = task.taskStatus ? "line-through opacity-75" : "";
@@ -61,6 +64,46 @@ export const TaskCard = ({ task, onEdit, onDelete, onToggleStatus, theme, noTogg
         <div className="p-4 bg-[#F0F9FF] rounded-md text-gray-700 text-sm">
           {task.taskDescription}
         </div>
+      )}
+      {giveStar && task.taskStatus && (
+        <div className="flex justify-between">
+          {!starred ? (
+            <>
+              <h2>
+                Task Complete! Assign Star:
+              </h2>
+              <button
+                className="flex items-center justify-center text-accent hover:text-accent transition-all duration-150"
+                onClick={() => {
+                  giveStar(task.taskId)
+                  setStarred(true)
+                }}
+              >
+                <StarIcon className="w-5 h-5" /> {/* Red bin icon */}
+              </button>
+            </>
+          ) : (
+            <>
+              <h2>
+                Task Complete!
+              </h2>
+              <h2>
+                Star Assigned!
+              </h2>
+            </>
+
+          )}
+
+        </div>
+      )}
+      {!giveStar && starred && (
+        <div className="flex justify-between">
+          <h2 className="text-blue-700">
+            Star Recieved!
+          </h2>
+          <StarIcon className="w-5 h-5 text-accent" /> {/* Red bin icon */}
+        </div>
+
       )}
     </div>
   );

@@ -56,10 +56,28 @@ export const ManageChildList = ({ childId }) => {
     storedChild.assignedTasks = updatedTasks;
     // localStorage.setItem(localStorageKey, JSON.stringify(storedChild));
     localStorageManager.storeEncodedObject(localStorageKey, storedChild);
+  };
 
+  const handleGiveStar = (taskId) => {
+    console.log(taskId)
+    // const updatedTasks = assignedTasks.filter(task => task.taskId !== taskId);
+    // setAssignedTasks(updatedTasks);
+
+    // const storedChild = JSON.parse(localStorage.getItem(localStorageKey)) || {};
+    const storedChild = localStorageManager.retrieveEncodedObject(localStorageKey) || {};
+    // Ensure assignedTasks is an array
+    const updatedTasks = (storedChild.assignedTasks || []).map((task) =>
+      task.taskId === taskId ? { ...task, starred: true } : task
+    );
+
+    // Update the object with modified tasks
+    storedChild.assignedTasks = updatedTasks;
+    // storedChild.assignedTasks = updatedTasks;
+    localStorageManager.storeEncodedObject(localStorageKey, storedChild);
+    // localStorage.setItem(localStorageKey, JSON.stringify(storedChild));
   };
   const boxClasses =
-  "min-h-3/4 max-h-3/4 bg-gradient-to-br from-white to-gray-100 rounded-3xl border border-gray-300 p-6 overflow-y-auto shadow-lg transition-shadow duration-300 ease-in-out [&::-webkit-scrollbar]:w-0 min-w-[600px]";
+    "min-h-3/4 max-h-3/4 bg-gradient-to-br from-white to-gray-100 rounded-3xl border border-gray-300 p-6 overflow-y-auto shadow-lg transition-shadow duration-300 ease-in-out [&::-webkit-scrollbar]:w-0 min-w-[600px]";
 
   return (
     <>
@@ -75,7 +93,7 @@ export const ManageChildList = ({ childId }) => {
           {assignedTasks.length !== 0 ? (
             <div className="flex flex-col gap-2 pb-2">
               {assignedTasks.map((task) => (
-                <TaskCard key={task.taskId} task={task} onDelete={handleDelete} theme="blue" noToggle/>
+                <TaskCard key={task.taskId} task={task} onDelete={handleDelete} noToggle giveStar={handleGiveStar} />
               ))}
             </div>
           ) : (
