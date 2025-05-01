@@ -33,12 +33,13 @@ export const AnalyticsView = () => {
         ...(child.archivedTasks || []) // Include archived tasks
       ];
       const tasksCompleted = allTasks.filter((task) => task.taskStatus).length;
+      const tasksStarred = allTasks.filter((task) => task.starred).length;
 
       return {
         name: child.name,
         theme: child.theme,
         tasksCompleted,
-        starsEarned: child.stars || 0,
+        starsEarned: tasksStarred || 0,
         character: child.theme === "pink" ? characterPink : characterOrange,
       };
     });

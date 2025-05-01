@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Calendar, ChevronLeft, ChevronRight, Plus } from 'lucide-react';
 import AddEventModel from '../components/AddEventModel';
 import { NavBar } from '../components/NavBar';
-import { useLocation } from 'react-router-dom';
+import { localStorageManager } from '../utils/localStorageManager';
 
 const SharedView = () => {
   const location = useLocation();
@@ -15,10 +15,11 @@ const SharedView = () => {
 
   // load evnts from localStorage on first render
   useEffect(() => {
-    const stored = localStorage.getItem('householdCalendarEvents');
+    // const stored = localStorage.getItem('householdCalendarEvents');
+    const stored = localStorageManager.retrieveEncodedObject('householdCalendarEvents')
     if (stored) {
       try {
-        const parsed = JSON.parse(stored).map(evt => ({ ...evt, date: new Date(evt.date) }));
+        const parsed = stored.map(evt => ({ ...evt, date: new Date(evt.date) }));
         setEvents(parsed);
       } catch (err) {
         console.error('Failed to parse events', err);
@@ -33,7 +34,8 @@ const SharedView = () => {
       hasLoaded.current = true;
       return;
     }
-    localStorage.setItem('householdCalendarEvents', JSON.stringify(events));
+    localStorageManager.storeEncodedObject('householdCalendarEvents', events)
+    // localStorage.setItem('householdCalendarEvents', JSON.stringify(events));
   }, [events]);
 
   // simple helpers for calendar math
