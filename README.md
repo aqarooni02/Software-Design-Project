@@ -197,4 +197,4 @@
 - Jira:
 - Meeting Minutes: 
 - Architecture Diagrams:
-- User Manual: 
+- User Manual: https://aubh-my.sharepoint.com/:w:/g/personal/a01095_aubh_edu_bh/EXPqY_w5GeRKjup6RC_1bKcBcaPbW6CEd7pICcNX1jjOSw?e=aeVbKw
