@@ -12,10 +12,10 @@
 - 📝 Task creation, editing, deletion, and priority setting
 - ✅ Mark tasks as in progress or complete
 - 📅 Shared family calendar for events
-- 📊 Analytics view for task performance
+- 📊 Analytics view for task performance (parent can use this only)
 - 🎨 Dynamic theming based on user role
-- 💾 Persistent localStorage-based state
-- 🧪 Fully tested using Jest and React Testing Library
+- 💾 local storage
+- 🧪 Fully tested using Jest and React Testing Library (automated testing)
 
 ---
 
@@ -23,10 +23,9 @@
 
 - **Frontend**: React, JSX, Tailwind CSS
 - **State Management**: React Hooks (`useState`, `useContext`)
-- **Persistence**: localStorage
+- **Persistence**: local storage
 - **Testing**: Jest, React Testing Library
-- **Linting**: ESLint with Airbnb style guide
-- **Tooling**: Vite, Cursor, VSCode
+- **Linting**: ESLint
 
 ---
 
