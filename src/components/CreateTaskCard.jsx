@@ -15,6 +15,10 @@ export const CreateTaskCard = ({ onSave, onCancel, theme }) => {
       alert("Please fill in all fields!");
       return;
     }
+    if (new Date(taskDate) < new Date()) {
+      alert("Please select a future date!");
+      return;
+    }
     console.log("Saving task:", { taskTitle, taskDate, taskDescription, taskPriority }); // Debug log
     onSave(
       new Task(
@@ -58,6 +62,7 @@ export const CreateTaskCard = ({ onSave, onCancel, theme }) => {
               value={taskDate}
               onChange={(e) => setTaskDate(e.target.value)}
               className="w-full p-4 border rounded-lg text-black"
+              min={new Date().toISOString().split("T")[0]} // Disable past dates
             />
           </div>
 

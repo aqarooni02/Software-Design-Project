@@ -15,6 +15,10 @@ export const EditTaskCard = ({ onEdit, onCancel, currentTask, theme }) => {
       alert("Please fill in all fields!");
       return;
     }
+    if (new Date(taskDate) < new Date()) {
+      alert("Please select a future date!");
+      return;
+    }
     // console.log(typeof currentTask)
     // console.log(currentTask)
     // console.log(currentTask instanceof Task)
@@ -76,6 +80,7 @@ export const EditTaskCard = ({ onEdit, onCancel, currentTask, theme }) => {
               value={taskDate}
               onChange={(e) => setTaskDate(e.target.value)}
               className="w-full p-4 border rounded-lg text-black"
+              min={new Date().toISOString().split("T")[0]} // Prevent past dates
             />
           </div>
 
@@ -108,22 +113,22 @@ export const EditTaskCard = ({ onEdit, onCancel, currentTask, theme }) => {
             </select>
           </div>
         </div>
-      <div className="flex gap-6 mt-8 justify-center">
-        <button
-          onClick={onCancel}
-          className="flex items-center gap-2 py-3 px-6 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all"
-        >
-          <XCircleIcon className="w-6 h-6" />
-          Cancel
-        </button>
-        <button
-          onClick={handleSave}
-          className="flex items-center gap-2 py-3 px-6 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-all"
-        >
-          <CheckCircleIcon className="w-6 h-6" />
-          Save
-        </button>
-      </div>
+        <div className="flex gap-6 mt-8 justify-center">
+          <button
+            onClick={onCancel}
+            className="flex items-center gap-2 py-3 px-6 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all"
+          >
+            <XCircleIcon className="w-6 h-6" />
+            Cancel
+          </button>
+          <button
+            onClick={handleSave}
+            className="flex items-center gap-2 py-3 px-6 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-all"
+          >
+            <CheckCircleIcon className="w-6 h-6" />
+            Save
+          </button>
+        </div>
       </div>
     </div>
   );
