@@ -17,34 +17,11 @@ import { useNavigate } from "react-router-dom";
  */
 export const ToDoParent = () => {
     const navigate = useNavigate();
-    const [password, setPassword] = useState('');
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [error, setError] = useState('');
     const [addingTask, setAddingTask] = useState(false);
     const [isEditingTask, setEditingTask] = useState(false);
     const [taskToEdit, setTaskToEdit] = useState(null);
     const [parentTasks, setParentTasks] = useState([]);
     const [childSelected, setChildSelected] = useState(null);
-
-    // Check for existing authentication on component mount
-    useEffect(() => {
-        const auth = localStorageManager.retrieveEncodedObject("parent_auth");
-        if (auth) {
-            setIsAuthenticated(true);
-        }
-    }, []);
-
-    // Simple password check: 2 + 2 = 4
-    const checkPassword = () => {
-        if (password === '4') {
-            setIsAuthenticated(true);
-            setError('');
-            // Store authentication in localStorage
-            localStorageManager.storeEncodedObject("parent_auth", { authenticated: true });
-        } else {
-            setError('Wrong answer! Try again.');
-        }
-    };
 
     useEffect(() => {
         const parent_data = localStorageManager.retrieveEncodedObject("parent_data");
@@ -169,37 +146,6 @@ export const ToDoParent = () => {
             );
         }
     };
-
-    if (!isAuthenticated) {
-        return (
-            <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-                <div className="p-8 bg-white rounded-lg shadow-md relative">
-                    <button 
-                        onClick={() => navigate('/profile-selection')}
-                        className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-2xl"
-                    >
-                        ×
-                    </button>
-                    <h2 className="text-2xl text-black font-bold mb-6 text-center">Parent Access</h2>
-                    <p className="mb-4 text-center text-black">What is 2 + 2?</p>
-                    {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
-                    <input
-                        type="text"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-black"
-                        placeholder="Enter the answer"
-                    />
-                    <button
-                        onClick={checkPassword}
-                        className="mt-4 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                    >
-                        Submit
-                    </button>
-                </div>
-            </div>
-        );
-    }
 
     return (
         <div className="h-screen flex flex-col bg-white">
