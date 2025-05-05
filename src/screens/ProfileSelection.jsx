@@ -167,7 +167,7 @@ export const ProfileSelection = () => {
                 />
                 <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-3/4 h-6 bg-black opacity-10 rounded-full blur-sm"></div>
               </div>
-              <p className="mt-6 text-center text-2xl font-bold text-gray-400 drop-shadow-sm">
+              <p className="mt-6 text-center text-2xl font-bold drop-shadow-sm">
                 Add Child
               </p>
             </div>
