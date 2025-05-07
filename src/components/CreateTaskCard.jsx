@@ -11,12 +11,16 @@ export const CreateTaskCard = ({ onSave, onCancel, theme }) => {
   const [taskPriority, setTaskPriority] = useState("Medium");
 
   const handleSave = () => {
-    if (!taskTitle || !taskDate || !taskDescription) {
+    if (!taskTitle || !taskDate) {
       alert("Please fill in all fields!");
       return;
     }
     if (new Date(taskDate) < new Date()) {
       alert("Please select a future date!");
+      return;
+    }
+    if (!/[a-zA-Z]/.test(taskTitle)) {
+      alert("Task title must contain at least one letter!");
       return;
     }
     console.log("Saving task:", { taskTitle, taskDate, taskDescription, taskPriority }); // Debug log
