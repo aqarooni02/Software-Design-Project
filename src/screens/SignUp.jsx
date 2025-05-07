@@ -9,6 +9,22 @@ export const SignUp = () => {
   const navigate = useNavigate();
 
   const handleSignUp = (e) => {
+    if (password.length < 6) {
+      alert('Password must be at least 6 characters long.');
+      return;
+    }
+    if (!/\d/.test(password)) {
+      alert('Password must contain at least one number.');
+      return;
+    }
+    if (!/[a-zA-Z]/.test(password)) {
+      alert('Password must contain at least one letter.');
+      return;
+    }
+    if (!/[!@#$%^&*]/.test(password)) {
+      alert('Password must contain at least one special character.');
+      return;
+    }
     e.preventDefault();
     navigate('/profile-selection');
   };
